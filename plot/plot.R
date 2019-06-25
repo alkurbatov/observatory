@@ -21,7 +21,7 @@ text(
 tasks <- read.csv(file="tasks.csv")
 implemented_tasks <- barplot(
   tasks$ImplementedTasks,
-  main="Implemneted tasks",
+  main="Implemented tasks",
   xlab="Sprints",
   ylab="Total",
   ylim=c(0, 40),
