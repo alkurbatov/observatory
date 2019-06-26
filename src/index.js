@@ -4,6 +4,7 @@ const config = require('config')
 const connector = require('jira-connector')
 const DataExporter = require('./exporter')
 const Filter = require('./jql')
+const statistics = require('./statistics')
 
 
 const jira = new connector({
@@ -72,10 +73,7 @@ async function main() {
   for (let i = config.starting_sprint; i != last_sprint; i++) {
     let issues = await fetchData(jql, i)
 
-    const total_story_points = issues.issues.reduce(
-      (sum, item) => sum + item.fields.customfield_10203, 0)
-
-    exporter.dump([i, issues.total, total_story_points])
+    exporter.dump([i, issues.total, statistics.sumStoryPoints(issues.issues)])
   }
 
   // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
