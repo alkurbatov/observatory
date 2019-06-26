@@ -55,3 +55,13 @@ text(
   col = "blue",
 )
 
+# Average story points burned
+story_points_mean <- mean(tasks$TotalStoryPoints)
+mtext(
+  sprintf("Average: %0.2f", story_points_mean),
+  4, # right
+  adj=1,
+  las=1,
+  padj=-22
+)
+
