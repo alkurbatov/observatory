@@ -74,5 +74,9 @@ module.exports = class Filter {
   sprint(name) {
     return this.equals('Sprint', name)
   }
+
+  epicLink(name) {
+    return this.equals('"Epic Link"', name)
+  }
 }
 
