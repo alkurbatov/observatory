@@ -8,7 +8,7 @@
     "start:debug": "node inspect src/index.js",
     "mine-data": "node src/index.js",
     "plot": "Rscript plot/plot.R",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Alexander Kurbatov",
   "license": "GPL-3.0",
@@ -16,5 +16,8 @@
     "config": "^3.1.0",
     "csv-stringify": "^5.3.0",
     "jira-connector": "^2.11.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }
