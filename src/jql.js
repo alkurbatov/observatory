@@ -75,6 +75,7 @@ module.exports = class Filter {
     return this.equals('Sprint', name)
   }
 
+  // NOTE (alkurbatov): Specify either name of an epic or epic issue id.
   epicLink(name) {
     return this.equals('"Epic Link"', name)
   }
