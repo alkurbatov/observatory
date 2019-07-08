@@ -61,7 +61,7 @@ async function main() {
 
   jql.project('VSTOR')
     .and().resolved()
-    .and().issueType(['"Dev task"', '"Dev sub task"'])
+    .and().issueType(['"Dev task"', '"Dev sub task"', 'Task'])
     .and().component(config.jql.components)
 
   // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
