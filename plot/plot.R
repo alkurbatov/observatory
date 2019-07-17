@@ -10,12 +10,12 @@ fixed_issues <- barplot(
 )
 
 text(
-  x = fixed_issues,
-  y = bugs$FixedBugs,
-  label = bugs$FixedBugs,
-  pos = 3,
-  cex = 0.8,
-  col = "blue",
+  x=fixed_issues,
+  y=bugs$FixedBugs,
+  label=bugs$FixedBugs,
+  pos=3,
+  cex=0.8,
+  col="blue",
 )
 
 # Found vs Resolved issues
@@ -23,9 +23,9 @@ fix_rate <- scan("fix_rate.csv", sep=",", skip=1, quiet=TRUE)
 vs_labels <- paste(c("Bugs reported", "Bugs resolved"), "\n", fix_rate, sep="")
 pie(
   fix_rate,
-  labels = vs_labels,
-  main = "Devs VS QA",
-  col = rainbow(length(vs_labels))
+  labels=vs_labels,
+  main="Devs VS QA",
+  col=rainbow(length(vs_labels))
 )
 
 # Implemented dev tasks and storypoints
@@ -40,12 +40,12 @@ implemented_tasks <- barplot(
 )
 
 text(
-  x = implemented_tasks,
-  y = tasks$ImplementedTasks,
-  label = tasks$ImplementedTasks,
-  pos = 3,
-  cex = 0.8,
-  col = "blue",
+  x=implemented_tasks,
+  y=tasks$ImplementedTasks,
+  label=tasks$ImplementedTasks,
+  pos=3,
+  cex=0.8,
+  col="blue",
 )
 
 total_story_points <- barplot(
@@ -58,12 +58,12 @@ total_story_points <- barplot(
 )
 
 text(
-  x = total_story_points,
-  y = tasks$TotalStoryPoints,
-  label = tasks$TotalStoryPoints,
-  pos = 3,
-  cex = 0.8,
-  col = "blue",
+  x=total_story_points,
+  y=tasks$TotalStoryPoints,
+  label=tasks$TotalStoryPoints,
+  pos=3,
+  cex=0.8,
+  col="blue",
 )
 
 # Average story points burned
