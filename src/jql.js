@@ -63,12 +63,16 @@ module.exports = class Filter {
     return this.oneOf('fixVersion', versions)  
   }
 
-  resolved() {
+  fixed() {
     return this.oneOf('Resolution', ['Fixed', 'Done'])
   }
 
   unresolved() {
     return this.equals('Resolution', 'Unresolved')
+  }
+
+  resolved() {
+    return this.equals('Status', 'Resolved')
   }
 
   sprint(name) {
@@ -78,6 +82,10 @@ module.exports = class Filter {
   // NOTE (alkurbatov): Specify either name of an epic or epic issue id.
   epicLink(name) {
     return this.equals('"Epic Link"', name)
+  }
+
+  createdLastWeek() {
+    return this.jql += ' created > -1w '
   }
 }
 

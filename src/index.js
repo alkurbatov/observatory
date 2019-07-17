@@ -15,13 +15,16 @@ const jira = new connector({
   },
 })
 
-async function fetchData(jql, sprint) {
+async function fetchDataBySprint(jql, sprint) {
   let sprint_filter = new Filter(jql.getFilter())
     .and().sprint(`"HCI Sprint ${sprint}"`)
     .and().not().sprint(`"HCI Sprint ${sprint + 1}"`)
+  return await fetchData(sprint_filter)
+}
 
+async function fetchData(jql) {
   return await jira.search.search({
-    jql: sprint_filter.getFilter(),
+    jql: jql.getFilter(),
     startAt: 0,
     maxResults: 1000,
     // NOTE (alkurbatov): Use '*all' to list all possible fields.
@@ -45,36 +48,63 @@ async function main() {
 
   let jql = new Filter()
   jql.project('VSTOR')
-    .and().resolved()
+    .and().fixed()
     .and().issueType(['Bug, Bugfix'])
     .and().component(config.jql.components)
 
   let exporter = new DataExporter('bugs.csv')
-  exporter.dump(['SprintId', 'ResolvedBugs'])
+  exporter.dump(['SprintId', 'FixedBugs'])
 
   for (let i = config.starting_sprint; i != last_sprint; i++) {
-    let issues = await fetchData(jql, i)
+    let issues = await fetchDataBySprint(jql, i)
     exporter.dump([i, issues.total])
   }
 
+  // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
+  //exporter.shutdown()
   jql.reset()
 
   jql.project('VSTOR')
-    .and().resolved()
+    .and().fixed()
     .and().issueType(['"Dev task"', '"Dev sub task"', 'Task'])
     .and().component(config.jql.components)
-
-  // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
-  //exporter.shutdown()
 
   exporter = new DataExporter('tasks.csv')
   exporter.dump(['SprintId', 'ImplementedTasks', 'TotalStoryPoints'])
 
   for (let i = config.starting_sprint; i != last_sprint; i++) {
-    let issues = await fetchData(jql, i)
+    let issues = await fetchDataBySprint(jql, i)
 
     exporter.dump([i, issues.total, statistics.sumStoryPoints(issues.issues)])
   }
+
+  // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
+  //exporter.shutdown()
+
+  exporter = new DataExporter('fix_rate.csv')
+  exporter.dump(['createdLastWeek', 'resolvedLastWeek'])
+
+  jql.reset()
+
+  jql.project('VSTOR')
+    .and().unresolved()
+    .and().issueType(['Bug', 'Bugfix'])
+    .and().component(config.jql.components)
+    .and().fixVersion(config.jql.fix_versions)
+    .and().createdLastWeek()
+  let created_last_week = await fetchData(jql)
+
+  jql.reset()
+
+  jql.project('VSTOR')
+    .and().resolved()
+    .and().issueType(['Bug', 'Bugfix'])
+    .and().component(config.jql.components)
+    .and().fixVersion(config.jql.fix_versions)
+    .and().createdLastWeek()
+  let resolved_last_week = await fetchData(jql)
+
+  exporter.dump([created_last_week.total, resolved_last_week.total])
 
   // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
   //exporter.shutdown()

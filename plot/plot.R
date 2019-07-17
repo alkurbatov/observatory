@@ -1,7 +1,7 @@
 bugs <- read.csv(file="bugs.csv")
 
 fixed_issues <- barplot(
-  bugs$ResolvedBugs,
+  bugs$FixedBugs,
   main="Fixed bugs",
   xlab="Sprints",
   ylab="Total",
@@ -11,13 +11,24 @@ fixed_issues <- barplot(
 
 text(
   x = fixed_issues,
-  y = bugs$ResolvedBugs,
-  label = bugs$ResolvedBugs,
+  y = bugs$FixedBugs,
+  label = bugs$FixedBugs,
   pos = 3,
   cex = 0.8,
   col = "blue",
 )
 
+# Found vs Resolved issues
+fix_rate <- scan("fix_rate.csv", sep=",", skip=1, quiet=TRUE)
+vs_labels <- paste(c("Bugs reported", "Bugs resolved"), "\n", fix_rate, sep="")
+pie(
+  fix_rate,
+  labels = vs_labels,
+  main = "Devs VS QA",
+  col = rainbow(length(vs_labels))
+)
+
+# Implemented dev tasks and storypoints
 tasks <- read.csv(file="tasks.csv")
 implemented_tasks <- barplot(
   tasks$ImplementedTasks,

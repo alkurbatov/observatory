@@ -23,5 +23,8 @@ module.exports = {
     // e.g:
     // ['WebCP::Frontend', '"UI/UX"', 'SPLA', '"S3 User App"']
     components: [],
+
+    // List of milestones of a project.
+    fix_versions: [],
   }
 }
