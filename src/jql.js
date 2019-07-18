@@ -7,11 +7,6 @@ module.exports = class Filter {
     this.invert = false
   }
 
-  reset() {
-    this.jql = ''
-    this.invert = false
-  }
-
   getFilter() {
     return this.jql
   }

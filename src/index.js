@@ -47,7 +47,7 @@ async function main() {
   const last_sprint = config.starting_sprint + config.window_size
 
   let jql = new Filter()
-  jql.project('VSTOR')
+    .project('VSTOR')
     .and().fixed()
     .and().issueType(['Bug, Bugfix'])
     .and().component(config.jql.components)
@@ -62,9 +62,9 @@ async function main() {
 
   // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
   //exporter.shutdown()
-  jql.reset()
 
-  jql.project('VSTOR')
+  jql = new Filter()
+    .project('VSTOR')
     .and().fixed()
     .and().issueType(['"Dev task"', '"Dev sub task"', 'Task'])
     .and().component(config.jql.components)
@@ -84,18 +84,16 @@ async function main() {
   exporter = new DataExporter('fix_rate.csv')
   exporter.dump(['createdLastWeek', 'resolvedLastWeek'])
 
-  jql.reset()
-
-  jql.project('VSTOR')
+  jql = new Filter()
+    .project('VSTOR')
     .and().issueType(['Bug', 'Bugfix'])
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
     .and().createdLastWeek()
   let created_last_week = await fetchData(jql)
 
-  jql.reset()
-
-  jql.project('VSTOR')
+  jql = new Filter()
+    .project('VSTOR')
     .and().issueType(['Bug', 'Bugfix'])
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
