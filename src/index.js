@@ -47,7 +47,7 @@ async function main() {
   const last_sprint = config.starting_sprint + config.window_size
 
   let jql = new Filter()
-    .project('VSTOR')
+    .project(config.jql.project)
     .and().fixed()
     .and().issueType(['Bug, Bugfix'])
     .and().component(config.jql.components)
@@ -64,7 +64,7 @@ async function main() {
   //exporter.shutdown()
 
   jql = new Filter()
-    .project('VSTOR')
+    .project(config.jql.project)
     .and().fixed()
     .and().issueType(['"Dev task"', '"Dev sub task"', 'Task'])
     .and().component(config.jql.components)
@@ -85,7 +85,7 @@ async function main() {
   exporter.dump(['createdLastWeek', 'resolvedLastWeek'])
 
   jql = new Filter()
-    .project('VSTOR')
+    .project(config.jql.project)
     .and().issueType(['Bug', 'Bugfix'])
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
@@ -93,7 +93,7 @@ async function main() {
   let created_last_week = await fetchData(jql)
 
   jql = new Filter()
-    .project('VSTOR')
+    .project(config.jql.project)
     .and().issueType(['Bug', 'Bugfix'])
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)

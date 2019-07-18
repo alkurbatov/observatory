@@ -18,6 +18,9 @@ module.exports = {
 
   // JQL filter settings.
   jql: {
+    // Name of the project one works on.
+    project: undefined,
+
     // List of required components.
     // Warning: All values should be escaped in a proper way.
     // e.g:
