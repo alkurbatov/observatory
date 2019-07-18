@@ -47,6 +47,11 @@ module.exports = class Filter {
     return this
   }
 
+  greaterOrEquals(field, value) {
+    this.jql += `${field} >= ${value}`
+    return this
+  }
+
   project(project_name) {
     return this.equals('project', project_name)
   }
@@ -85,7 +90,11 @@ module.exports = class Filter {
   }
 
   createdLastWeek() {
-    return this.jql += ' created > -1w '
+    return this.greaterOrEquals('created', '-1w')
+  }
+
+  resolvedLastWeek() {
+    return this.greaterOrEquals('resolutiondate', '-1w')
   }
 }
 

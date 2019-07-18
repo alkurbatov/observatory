@@ -87,7 +87,6 @@ async function main() {
   jql.reset()
 
   jql.project('VSTOR')
-    .and().unresolved()
     .and().issueType(['Bug', 'Bugfix'])
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
@@ -97,11 +96,10 @@ async function main() {
   jql.reset()
 
   jql.project('VSTOR')
-    .and().resolved()
     .and().issueType(['Bug', 'Bugfix'])
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
-    .and().createdLastWeek()
+    .and().resolvedLastWeek()
   let resolved_last_week = await fetchData(jql)
 
   exporter.dump([created_last_week.total, resolved_last_week.total])

@@ -18,13 +18,13 @@ text(
   col="blue",
 )
 
-# Found vs Resolved issues
+# Created vs Resolved issues
 fix_rate <- scan("fix_rate.csv", sep=",", skip=1, quiet=TRUE)
 vs_labels <- paste(c("Bugs reported", "Bugs resolved"), "\n", fix_rate, sep="")
 pie(
   fix_rate,
   labels=vs_labels,
-  main="Devs VS QA",
+  main="Devs VS QA (last week)",
   col=rainbow(length(vs_labels))
 )
 
