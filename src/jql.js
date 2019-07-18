@@ -55,6 +55,14 @@ module.exports = class Filter {
     return this.oneOf('Type', issue_types)  
   }
 
+  isDevTask() {
+    return this.issueType(['"Dev task"', '"Dev sub task"', 'Task'])
+  }
+
+  isBug() {
+    return this.issueType(['Bug', 'Bugfix'])
+  }
+
   component(components) {
     return this.oneOf('Component', components)  
   }
