@@ -15,7 +15,8 @@
   "dependencies": {
     "config": "^3.1.0",
     "csv-stringify": "^5.3.0",
-    "jira-connector": "^2.11.0"
+    "jira-connector": "^2.11.0",
+    "rooty": "^2.0.0"
   },
   "devDependencies": {
     "jest": "^24.8.0"
