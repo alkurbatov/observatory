@@ -99,5 +99,13 @@ module.exports = class Filter {
   resolvedLastWeek() {
     return this.greaterOrEquals('resolutiondate', '-1w')
   }
+
+  createdWeeksAgo(count) {
+    return this.greaterOrEquals('created', `-${count}w`)
+  }
+
+  resolvedWeeksAgo(count) {
+    return this.greaterOrEquals('resolutiondate', `-${count}w`)
+  }
 }
 

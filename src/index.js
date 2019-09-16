@@ -89,7 +89,7 @@ async function main() {
     .and().isBug()
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
-    .and().createdLastWeek()
+    .and().createdWeeksAgo(2)
   let created_last_week = await fetchData(jql)
 
   jql = new Filter()
@@ -97,7 +97,7 @@ async function main() {
     .and().isBug()
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
-    .and().resolvedLastWeek()
+    .and().resolvedWeeksAgo(2)
   let resolved_last_week = await fetchData(jql)
 
   exporter.dump([created_last_week.total, resolved_last_week.total])
