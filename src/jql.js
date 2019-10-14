@@ -1,6 +1,5 @@
 'use strict'
 
-
 module.exports = class Filter {
   constructor(jql) {
     this.jql = jql || ''
@@ -63,6 +62,10 @@ module.exports = class Filter {
     return this.issueType(['Bug', 'Bugfix'])
   }
 
+  isIssue() {
+    return this.issueType(['"Dev task"', '"Dev sub task"', 'Task', 'Bug', 'Bugfix'])
+  }
+
   component(components) {
     return this.oneOf('Component', components)  
   }
@@ -83,6 +86,7 @@ module.exports = class Filter {
     return this.equals('Status', 'Resolved')
   }
 
+  // NOTE (alkurbatov): Specify either sprint name or id.
   sprint(name) {
     return this.equals('Sprint', name)
   }
@@ -108,4 +112,3 @@ module.exports = class Filter {
     return this.greaterOrEquals('resolutiondate', `-${count}w`)
   }
 }
-

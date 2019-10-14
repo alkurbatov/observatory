@@ -21,6 +21,9 @@ module.exports = {
     // Name of the project one works on.
     project: undefined,
 
+    // ID of the kanban board used to work with the project.
+    board_id: undefined,
+
     // List of required components.
     // Warning: All values should be escaped in a proper way.
     // e.g:

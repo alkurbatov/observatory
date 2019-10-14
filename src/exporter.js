@@ -35,4 +35,3 @@ module.exports = class DataExporter {
     console.log(err)
   }
 }
-

@@ -10,4 +10,3 @@ exports.sumStoryPoints = (issues) => {
     },
   0)
 }
-

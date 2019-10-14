@@ -1,46 +1,36 @@
 'use strict'
 
 const config = require('config')
-const connector = require('jira-connector')
 const DataExporter = require('./exporter')
 const Filter = require('./jql')
+const Jira = require('./connector')
 const statistics = require('./statistics')
 
 
-const jira = new connector({
+const jira = new Jira({
   host: config.host,
-  basic_auth: {
-    username: config.username,
-    password: config.password,
-  },
+  username: config.username,
+  password: config.password,
 })
+
+const fields = [
+  'key',
+  'summary',
+  'reporter',
+  'assignee',
+  'created',
+  'priority',
+  'status',
+  'resolution',
+  'timespent',
+  'customfield_10203',
+]
 
 async function fetchDataBySprint(jql, sprint) {
   let sprint_filter = new Filter(jql.getFilter())
     .and().sprint(`"HCI Sprint ${sprint}"`)
     .and().not().sprint(`"HCI Sprint ${sprint + 1}"`)
-  return await fetchData(sprint_filter)
-}
-
-async function fetchData(jql) {
-  return await jira.search.search({
-    jql: jql.getFilter(),
-    startAt: 0,
-    maxResults: 1000,
-    // NOTE (alkurbatov): Use '*all' to list all possible fields.
-    fields: [
-      'key',
-      'summary',
-      'reporter',
-      'assignee',
-      'created',
-      'priority',
-      'status',
-      'resolution',
-      'timespent',
-      'customfield_10203',
-    ]
-  })
+  return await jira.search(sprint_filter, fields)
 }
 
 async function main() {
@@ -90,7 +80,7 @@ async function main() {
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
     .and().createdWeeksAgo(2)
-  let created_last_week = await fetchData(jql)
+  let created_last_week = await jira.search(jql, fields)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -98,7 +88,7 @@ async function main() {
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
     .and().resolvedWeeksAgo(2)
-  let resolved_last_week = await fetchData(jql)
+  let resolved_last_week = await jira.search(jql, fields)
 
   exporter.dump([created_last_week.total, resolved_last_week.total])
 
@@ -109,4 +99,3 @@ async function main() {
 if (require.main === module) {
   main()
 }
-

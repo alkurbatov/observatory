@@ -13,6 +13,7 @@
   "author": "Alexander Kurbatov",
   "license": "GPL-3.0",
   "dependencies": {
+    "commander": "^3.0.2",
     "config": "^3.1.0",
     "csv-stringify": "^5.3.0",
     "jira-connector": "^2.11.0",
