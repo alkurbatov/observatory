@@ -8,6 +8,7 @@
     "start:debug": "node inspect src/index.js",
     "mine-data": "node src/index.js",
     "plot": "Rscript plot/plot.R",
+    "lint": "eslint src --color -f table",
     "test": "jest"
   },
   "author": "Alexander Kurbatov",
@@ -20,6 +21,7 @@
     "rooty": "^2.0.0"
   },
   "devDependencies": {
+    "eslint": "^6.5.1",
     "jest": "^24.9.0"
   }
 }
