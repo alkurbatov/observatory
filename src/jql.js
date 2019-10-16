@@ -63,7 +63,13 @@ module.exports = class Filter {
   }
 
   isIssue() {
-    return this.issueType(['"Dev task"', '"Dev sub task"', 'Task', 'Bug', 'Bugfix'])
+    return this.issueType([
+      'Bug',
+      'Bugfix',
+      '"Dev task"',
+      '"Dev sub task"',
+      'Task',
+    ])
   }
 
   component(components) {

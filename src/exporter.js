@@ -24,9 +24,9 @@ module.exports = class DataExporter {
   }
 
   onReadable() {
-    let row;
+    let row
 
-    while(row = this.stringifier.read()) {
+    while((row = this.stringifier.read())) {
       this.dst.write(row)
     }
   }

@@ -40,8 +40,8 @@ module.exports = class Jira {
 
 class Sprint {
   constructor(options) {
-      this.connector = options.connector
-      this.id = options.id
+    this.connector = options.connector
+    this.id = options.id
   }
 
   show() {

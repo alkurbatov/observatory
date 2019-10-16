@@ -8,5 +8,5 @@ exports.sumStoryPoints = (issues) => {
 
       return sum + item.fields.customfield_10203
     },
-  0)
+    0)
 }
