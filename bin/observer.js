@@ -3,6 +3,7 @@
 const rooty = require('rooty')
 rooty()
 
+const chalk = require('chalk')
 const config = require('config')
 const commander = require('commander')
 
@@ -22,13 +23,20 @@ program
   .command('sprints []')
   .description('print information about available sprints')
   .option('-f, --filter <sprint_id>', 'filter by particular id', undefined)
+  .option('-s, --state <sprint_state>', 'filter by particular state', 'active')
   .action(async function(cmd) {
-    if (cmd.filter) {
-      console.log(await jira.sprint(cmd.filter).show())
-      process.exit(0)
-    }
+    try {
+      if (cmd.filter) {
+        console.log(await jira.sprint(cmd.filter).show())
+        process.exit(0)
+      }
 
-    console.log(await jira.sprints(config.jql.board_id))
+      console.log(await jira.sprints(config.jql.board_id, cmd.state))
+    }
+    catch(err) {
+      console.error(chalk.red(err))
+      process.exit(1)
+    }
   })
 
 program

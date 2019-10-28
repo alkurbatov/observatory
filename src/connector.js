@@ -3,6 +3,8 @@
 const connector = require('jira-connector')
 
 
+const SprintStates = ['active', 'closed', 'future']
+
 module.exports = class Jira {
   constructor(options) {
     this.connector = new connector({
@@ -14,11 +16,15 @@ module.exports = class Jira {
     })
   }
 
-  sprints(board) {
+  sprints(board, state) {
+    if (!SprintStates.includes(state))
+      throw new Error('Invalid state specified')
+
     return this.connector.board.getAllSprints({
       boardId: board,
       startAt: 0,
       maxResults: 100,
+      state: state,
     })
   }
 
