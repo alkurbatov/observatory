@@ -1,7 +1,7 @@
 'use strict'
 
-const rooty = require('rooty');
-rooty();
+const rooty = require('rooty')
+rooty()
 
 const config = require('config')
 const commander = require('commander')
@@ -16,20 +16,20 @@ const jira = new Jira({
   username: config.username,
   password: config.password,
 })
-const program = new commander.Command();
+const program = new commander.Command()
 
 program
   .command('sprints []')
   .description('print information about available sprints')
-  .option('-f, --filter <sprint_id>', 'filter by particular sprint id', undefined)
+  .option('-f, --filter <sprint_id>', 'filter by particular id', undefined)
   .action(async function(cmd) {
     if (cmd.filter) {
       console.log(await jira.sprint(cmd.filter).show())
-      process.exit(0);
+      process.exit(0)
     }
 
     console.log(await jira.sprints(config.jql.board_id))
-  });
+  })
 
 program
   .command('move <from_sprint_id> <to_sprint_id>')
@@ -44,18 +44,18 @@ program
 
     let issues = await jira.sprint(from_sprint_id).issues(jql)
     let keys = issues.issues.reduce((result, item) => {
-        result.push(item.key)
-        return result
-      },
+      result.push(item.key)
+      return result
+    },
     [])
     console.log(`Found ${keys.length} issues:`)
     console.log(keys)
 
     if (cmd.dryrun)
-      process.exit(0);
+      process.exit(0)
 
     await jira.sprint(from_sprint_id).moveIssues(to_sprint_id, keys)
-  });
+  })
 
 program
   .command('sum <epic_id>')
@@ -75,13 +75,14 @@ program
     const all_issues = await jira.search(jql, fields)
     const total_points = statistics.sumStoryPoints(all_issues.issues)
 
-    jql.and().resolved();
+    jql.and().resolved()
 
     const resolved_issues = await jira.search(jql, fields)
     const burned_points = statistics.sumStoryPoints(resolved_issues.issues)
     const percent_done = ((100 * burned_points) / total_points).toFixed(1)
 
-    console.log(`Story points sum: ${burned_points}/${total_points} (${percent_done}%)`)
+    console.log(
+      `Story points sum: ${burned_points}/${total_points} (${percent_done}%)`)
 
     all_issues.issues.forEach(item => {
       if (item.fields.customfield_10203)
@@ -89,6 +90,6 @@ program
 
       console.log(`The issue ${item.key} is not estimated`)
     })
-  });
+  })
 
-program.parse(process.argv);
+program.parse(process.argv)
