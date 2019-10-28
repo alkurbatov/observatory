@@ -8,7 +8,7 @@
     "start:debug": "node inspect src/index.js",
     "mine-data": "node src/index.js",
     "plot": "Rscript plot/plot.R",
-    "lint": "eslint src --color -f table",
+    "lint": "eslint ./bin ./src --color -f table",
     "test": "jest"
   },
   "author": "Alexander Kurbatov",
