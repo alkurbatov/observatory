@@ -28,17 +28,17 @@ test('Throw on invalid sprint states', () => {
 
   expect(() => {
     jira.sprints(123, 'xxx')
-  }).toThrow()
+  }).toThrow('Invalid state specified')
 
   expect(() => {
     jira.sprints(123, '')
-  }).toThrow()
+  }).toThrow('Invalid state specified')
 
   expect(() => {
     jira.sprints(123, null)
-  }).toThrow()
+  }).toThrow('Invalid state specified')
 
   expect(() => {
     jira.sprints(123, undefined)
-  }).toThrow()
+  }).toThrow('Invalid state specified')
 })
