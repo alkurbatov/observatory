@@ -72,6 +72,7 @@ program
     const fields = [
       'key',
       'summary',
+      'resolution',
       'customfield_10203',
     ]
 
@@ -100,7 +101,10 @@ program
       `Story points sum: ${burned_points}/${total_points} (${percent_done}%)`)
 
     all_issues.issues.forEach(item => {
-      if (item.fields.customfield_10203)
+      // NOTE (alkurbatov): id === '2' means 'Won't Fix'.
+      // This is a workaround as by unknown reason we can't use
+      // JQL filter like 'resolution != "Won\'t Fix"'.
+      if (item.fields.customfield_10203 || item.fields.resolution.id === '2')
         return
 
       console.log(`The issue ${item.key} is not estimated`)
