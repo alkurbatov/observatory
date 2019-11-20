@@ -101,11 +101,14 @@ program
       `Story points sum: ${burned_points}/${total_points} (${percent_done}%)`)
 
     all_issues.issues.forEach(item => {
-      // NOTE (alkurbatov): id === '2' means 'Won't Fix'.
-      // This is a workaround as by unknown reason we can't use
-      // JQL filter like 'resolution != "Won\'t Fix"'.
-      if (item.fields.customfield_10203 || item.fields.resolution.id === '2')
+      // NOTE (alkurbatov): This is a workaround as
+      // by unknown reason we can't use JQL filter like
+      // 'resolution != "Won\'t Fix"'.
+      if (item.fields.customfield_10203
+        || item.fields.resolution.name === 'Won\'t Fix'
+        || item.fields.resolution.name === 'Invalid') {
         return
+      }
 
       console.log(`The issue ${item.key} is not estimated`)
     })
