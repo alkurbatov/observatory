@@ -5,6 +5,7 @@ rooty()
 
 const chalk = require('chalk')
 const config = require('config')
+const columnify = require('columnify')
 const commander = require('commander')
 
 const Filter = require('^src/jql')
@@ -97,21 +98,20 @@ program
       ((100 * burned_points) / total_points).toFixed(1)
       : 0
 
+    let data = []
+    all_issues.issues.forEach(item => {
+      data.push({
+        key: item.key,
+        points: item.fields.customfield_10203 || '???',
+        state: item.fields.resolution && item.fields.resolution.name
+          || 'Open'
+      })
+    })
+
+    console.log(columnify(data, config.columnify))
+    console.log('---------------------------------------')
     console.log(
       `Story points sum: ${burned_points}/${total_points} (${percent_done}%)`)
-
-    all_issues.issues.forEach(item => {
-      // NOTE (alkurbatov): This is a workaround as
-      // by unknown reason we can't use JQL filter like
-      // 'resolution != "Won\'t Fix"'.
-      if (item.fields.customfield_10203
-        || item.fields.resolution.name === 'Won\'t Fix'
-        || item.fields.resolution.name === 'Invalid') {
-        return
-      }
-
-      console.log(`The issue ${item.key} is not estimated`)
-    })
   })
 
 program.parse(process.argv)

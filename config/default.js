@@ -32,5 +32,19 @@ module.exports = {
 
     // List of milestones of a project.
     fix_versions: [],
+  },
+
+  // Settings of columnized output.
+  columnify: {
+    config: {
+      points: {
+        align: 'right',
+        'minWidth': 10
+      },
+      state: {
+        align: 'right',
+        'minWidth': 10
+      }
+    }
   }
 }
