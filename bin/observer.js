@@ -81,6 +81,11 @@ program
       .and().isDevTask()
 
     const all_issues = await jira.search(jql, fields)
+    if (!all_issues.issues.length) {
+      console.log('No issues found, please, check your filter')
+      process.exit(1)
+    }
+
     const total_points = statistics.sumStoryPoints(all_issues.issues)
 
     jql.and().resolved()
