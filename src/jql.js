@@ -46,6 +46,11 @@ module.exports = class Filter {
     return this
   }
 
+  raw(data) {
+    this.jql += data
+    return this
+  }
+
   project(project_name) {
     return this.equals('project', project_name)
   }
