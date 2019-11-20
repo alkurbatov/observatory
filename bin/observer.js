@@ -87,7 +87,9 @@ program
 
     const resolved_issues = await jira.search(jql, fields)
     const burned_points = statistics.sumStoryPoints(resolved_issues.issues)
-    const percent_done = ((100 * burned_points) / total_points).toFixed(1)
+    let percent_done = total_points ?
+      ((100 * burned_points) / total_points).toFixed(1)
+      : 0
 
     console.log(
       `Story points sum: ${burned_points}/${total_points} (${percent_done}%)`)
