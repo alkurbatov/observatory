@@ -21,6 +21,19 @@ const jira = new Jira({
 const program = new commander.Command()
 
 program
+  .command('boards')
+  .description('print information about available boards')
+  .action(async function() {
+    try {
+      console.log(await jira.boards(config.jql.project))
+    }
+    catch(err) {
+      console.error(chalk.red(err))
+      process.exit(1)
+    }
+  })
+
+program
   .command('sprints []')
   .description('print information about available sprints')
   .option('-f, --filter <sprint_id>', 'filter by particular id', undefined)

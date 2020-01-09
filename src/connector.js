@@ -16,6 +16,15 @@ module.exports = class Jira {
     })
   }
 
+  boards(project) {
+    return this.connector.board.getAllBoards({
+      startAt: 0,
+      maxResults: 100,
+      projectKeyOrId: project,
+      includePrivate: true,
+    })
+  }
+
   sprints(board, state) {
     if (!SprintStates.includes(state))
       throw new Error('Invalid state specified')
