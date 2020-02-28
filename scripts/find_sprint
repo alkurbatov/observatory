@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Search for a HCI Sprint id.
+
+for i in $(seq $1 $2); do
+    echo ${i}
+    node bin/observer.js sprints -f ${i} 2>/dev/null | grep "name: 'HCI Sprint"
+done
+
