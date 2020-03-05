@@ -24,7 +24,7 @@ vs_labels <- paste(c("Bugs reported", "Bugs resolved"), "\n", fix_rate, sep="")
 pie(
   fix_rate,
   labels=vs_labels,
-  main="Devs VS QA (last two weeks)",
+  main="Devs VS QA (last three weeks)",
   col=rainbow(length(vs_labels))
 )
 

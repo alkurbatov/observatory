@@ -79,7 +79,7 @@ async function main() {
     .and().isBug()
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
-    .and().createdWeeksAgo(2)
+    .and().createdWeeksAgo(3)
   let created_last_week = await jira.search(jql, fields)
 
   jql = new Filter()
