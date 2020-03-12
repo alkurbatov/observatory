@@ -79,7 +79,7 @@ async function main() {
     .and().isBug()
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
-    .and().createdWeeksAgo(3)
+    .and().createdWeeksAgo(config.qa_vs_dev.period)
   let created_last_week = await jira.search(jql, fields)
 
   jql = new Filter()
@@ -87,7 +87,7 @@ async function main() {
     .and().isBug()
     .and().component(config.jql.components)
     .and().fixVersion(config.jql.fix_versions)
-    .and().resolvedWeeksAgo(2)
+    .and().resolvedWeeksAgo(config.qa_vs_dev.period)
   let resolved_last_week = await jira.search(jql, fields)
 
   exporter.dump([created_last_week.total, resolved_last_week.total])

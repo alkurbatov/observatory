@@ -16,6 +16,11 @@ module.exports = {
   // Count of sprints included into analyzing interval.
   window_size: 12,
 
+  qa_vs_dev: {
+    // Number of weeks to gather 'resolved vs created' statistics.
+    period: 3
+  },
+
   // JQL filter settings.
   jql: {
     // Name of the project one works on.
