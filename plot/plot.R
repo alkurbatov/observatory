@@ -1,3 +1,13 @@
+# Created vs Resolved issues
+fix_rate <- scan("fix_rate.csv", sep=",", skip=1, quiet=TRUE)
+vs_labels <- paste(c("Bugs reported", "Bugs resolved"), "\n", fix_rate, sep="")
+pie(
+  fix_rate,
+  labels=vs_labels,
+  main="Devs VS QA (last three weeks)",
+  col=rainbow(length(vs_labels))
+)
+
 bugs <- read.csv(file="bugs.csv")
 
 fixed_issues <- barplot(
@@ -16,16 +26,6 @@ text(
   pos=3,
   cex=0.8,
   col="blue",
-)
-
-# Created vs Resolved issues
-fix_rate <- scan("fix_rate.csv", sep=",", skip=1, quiet=TRUE)
-vs_labels <- paste(c("Bugs reported", "Bugs resolved"), "\n", fix_rate, sep="")
-pie(
-  fix_rate,
-  labels=vs_labels,
-  main="Devs VS QA (last three weeks)",
-  col=rainbow(length(vs_labels))
 )
 
 # Implemented dev tasks and storypoints
