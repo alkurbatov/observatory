@@ -1,31 +1,31 @@
 {
   "env": {
     "browser": false,
+    "commonjs": true,
     "es6": true,
     "node": true,
     "jest": true
   },
-  "parserOptions": {
-    "ecmaVersion": 8
+  "extends": [
+    "standard"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
   },
-  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
   "rules": {
-    "indent": [
-      "error",
-      2
-    ],
+    "indent": ["error", 2],
     "linebreak-style": [
       "error",
       "unix"
     ],
-    "max-len": [
-      "error",
-      80,
-      2,
-      {
-        "ignoreUrls": true
-      }
-    ],
+    "camelcase": "off",
+    "max-len": ["error", 80, 2, {
+      "ignoreUrls": true
+    }],
     "quotes": [
       "error",
       "single"
@@ -33,6 +33,16 @@
     "semi": [
       "error",
       "never"
-    ]
+    ],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline"
+    }],
+    "curly": [2, "multi"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }]
   }
 }
