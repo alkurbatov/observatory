@@ -56,7 +56,7 @@ module.exports = class Filter {
   }
 
   issueType(issue_types) {
-    return this.oneOf('Type', issue_types)  
+    return this.oneOf('Type', issue_types)
   }
 
   isDevTask() {
@@ -78,11 +78,11 @@ module.exports = class Filter {
   }
 
   component(components) {
-    return this.oneOf('Component', components)  
+    return this.oneOf('Component', components)
   }
 
   fixVersion(versions) {
-    return this.oneOf('fixVersion', versions)  
+    return this.oneOf('fixVersion', versions)
   }
 
   fixed() {

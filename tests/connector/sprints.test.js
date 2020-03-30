@@ -6,12 +6,11 @@ jest.mock('jira-connector', () => {
   return jest.fn().mockImplementation(() => {
     return {
       board: {
-        getAllSprints: jest.fn()
-      }
+        getAllSprints: jest.fn(),
+      },
     }
   })
 })
-
 
 test('Don\'t throw on valid sprint states', () => {
   const jira = new Jira({})

@@ -3,17 +3,17 @@
 const Filter = require('jql')
 
 test('createdLastWeek forms correct filter', () => {
-  let jql = new Filter().createdLastWeek()
+  const jql = new Filter().createdLastWeek()
   expect(jql.getFilter()).toEqual('created >= -1w')
 })
 
 test('resolvedLastWeek forms correct filter', () => {
-  let jql = new Filter().resolvedLastWeek()
+  const jql = new Filter().resolvedLastWeek()
   expect(jql.getFilter()).toEqual('resolutiondate >= -1w')
 })
 
 test('createdWeeksAgo forms correct filter', () => {
-  let jql = new Filter().createdWeeksAgo(10)
+  const jql = new Filter().createdWeeksAgo(10)
   expect(jql.getFilter()).toEqual('created >= -10w')
 })
 
@@ -28,7 +28,7 @@ test('createdWeeksAgo throws on invalid data', () => {
 })
 
 test('resolvedWeeksAgo forms correct filter', () => {
-  let jql = new Filter().resolvedWeeksAgo(10)
+  const jql = new Filter().resolvedWeeksAgo(10)
   expect(jql.getFilter()).toEqual('resolutiondate >= -10w')
 })
 

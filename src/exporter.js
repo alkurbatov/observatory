@@ -3,7 +3,6 @@
 const fs = require('fs')
 const stringify = require('csv-stringify')
 
-
 module.exports = class DataExporter {
   constructor(target) {
     this.dst = fs.createWriteStream(target)
@@ -26,9 +25,8 @@ module.exports = class DataExporter {
   onReadable() {
     let row
 
-    while((row = this.stringifier.read())) {
+    while ((row = this.stringifier.read()))
       this.dst.write(row)
-    }
   }
 
   onError(err) {

@@ -12,7 +12,6 @@ const Filter = require('^src/jql')
 const Jira = require('^src/connector')
 const statistics = require('^src/statistics')
 
-
 const jira = new Jira({
   host: config.host,
   username: config.username,
@@ -23,11 +22,10 @@ const program = new commander.Command()
 program
   .command('boards')
   .description('print information about available boards')
-  .action(async function() {
+  .action(async function () {
     try {
       console.log(await jira.boards(config.jql.project))
-    }
-    catch(err) {
+    } catch (err) {
       console.error(chalk.red(err))
       process.exit(1)
     }
@@ -38,7 +36,7 @@ program
   .description('print information about available sprints')
   .option('-f, --filter <sprint_id>', 'filter by particular id', undefined)
   .option('-s, --state <sprint_state>', 'filter by particular state', 'active')
-  .action(async function(cmd) {
+  .action(async function (cmd) {
     try {
       if (cmd.filter) {
         console.log(await jira.sprint(cmd.filter).show())
@@ -46,8 +44,7 @@ program
       }
 
       console.log(await jira.sprints(config.jql.board_id, cmd.state))
-    }
-    catch(err) {
+    } catch (err) {
       console.error(chalk.red(err))
       process.exit(1)
     }
@@ -58,14 +55,14 @@ program
   .description('move open issues from one sprint to another')
   .option('-d, --dryrun', 'execute command without moving anything', false)
   .action(async function (from_sprint_id, to_sprint_id, cmd) {
-    let jql = new Filter()
+    const jql = new Filter()
     jql.project(config.jql.project)
       .and().component(config.jql.components)
       .and().unresolved()
       .and().isIssue()
 
-    let issues = await jira.sprint(from_sprint_id).issues(jql)
-    let keys = issues.issues.reduce((result, item) => {
+    const issues = await jira.sprint(from_sprint_id).issues(jql)
+    const keys = issues.issues.reduce((result, item) => {
       result.push(item.key)
       return result
     },
@@ -90,7 +87,7 @@ program
       'customfield_10203',
     ]
 
-    let jql = new Filter()
+    const jql = new Filter()
     jql.epicLink(epic_id)
       .and().component(config.jql.components)
       .and().isDevTask()
@@ -107,17 +104,17 @@ program
 
     const resolved_issues = await jira.search(jql, fields)
     const burned_points = statistics.sumStoryPoints(resolved_issues.issues)
-    let percent_done = total_points ?
-      ((100 * burned_points) / total_points).toFixed(1)
+    const percent_done = total_points
+      ? ((100 * burned_points) / total_points).toFixed(1)
       : 0
 
-    let data = []
+    const data = []
     all_issues.issues.forEach(item => {
       data.push({
         key: item.key,
         points: item.fields.customfield_10203 || '???',
-        state: item.fields.resolution && item.fields.resolution.name
-          || 'Open'
+        state: (item.fields.resolution && item.fields.resolution.name) ||
+          'Open',
       })
     })
 

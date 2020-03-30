@@ -1,13 +1,12 @@
 'use strict'
 
-const connector = require('jira-connector')
-
+const Connector = require('jira-connector')
 
 const SprintStates = ['active', 'closed', 'future']
 
 module.exports = class Jira {
   constructor(options) {
-    this.connector = new connector({
+    this.connector = new Connector({
       host: options.host,
       basic_auth: {
         username: options.username,
@@ -38,7 +37,7 @@ module.exports = class Jira {
   }
 
   sprint(id) {
-    return new Sprint({connector: this.connector, id: id})
+    return new Sprint({ connector: this.connector, id: id })
   }
 
   // NOTE (alkurbatov): Use '*all' in the fields array to list
@@ -72,7 +71,7 @@ class Sprint {
       fields: [
         'key',
         'resolution',
-      ]
+      ],
     })
   }
 
