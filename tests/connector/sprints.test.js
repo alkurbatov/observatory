@@ -1,5 +1,3 @@
-'use strict'
-
 const Jira = require('connector')
 
 jest.mock('jira-connector', () => {
@@ -12,7 +10,7 @@ jest.mock('jira-connector', () => {
   })
 })
 
-test('Don\'t throw on valid sprint states', () => {
+test('Not throw on valid sprint states', () => {
   const jira = new Jira({})
 
   expect(() => {

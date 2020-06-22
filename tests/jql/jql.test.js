@@ -1,5 +1,3 @@
-'use strict'
-
 const Filter = require('jql')
 
 test('createdLastWeek forms correct filter', () => {

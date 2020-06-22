@@ -1,5 +1,3 @@
-'use strict'
-
 const config = require('config')
 const DataExporter = require('./exporter')
 const Filter = require('./jql')
@@ -27,9 +25,12 @@ const fields = [
 
 async function fetchDataBySprint(jql, sprint) {
   const sprint_filter = new Filter(jql.getFilter())
-    .and().sprint(`"HCI Sprint ${sprint}"`)
-    .and().not().sprint(`"HCI Sprint ${sprint + 1}"`)
-  return await jira.search(sprint_filter, fields)
+    .and()
+    .sprint(`"HCI Sprint ${sprint}"`)
+    .and()
+    .not()
+    .sprint(`"HCI Sprint ${sprint + 1}"`)
+  return jira.search(sprint_filter, fields)
 }
 
 async function main() {
@@ -37,14 +38,18 @@ async function main() {
 
   let jql = new Filter()
     .project(config.jql.project)
-    .and().isBug()
-    .and().fixed()
-    .and().component(config.jql.components)
+    .and()
+    .isBug()
+    .and()
+    .fixed()
+    .and()
+    .component(config.jql.components)
 
   let exporter = new DataExporter('bugs.csv')
   exporter.dump(['SprintId', 'FixedBugs'])
 
   for (let i = config.starting_sprint; i !== last_sprint; i++) {
+    // eslint-disable-next-line no-await-in-loop
     const issues = await fetchDataBySprint(jql, i)
     exporter.dump([i, issues.total])
   }
@@ -54,14 +59,18 @@ async function main() {
 
   jql = new Filter()
     .project(config.jql.project)
-    .and().fixed()
-    .and().isDevTask()
-    .and().component(config.jql.components)
+    .and()
+    .fixed()
+    .and()
+    .isDevTask()
+    .and()
+    .component(config.jql.components)
 
   exporter = new DataExporter('tasks.csv')
   exporter.dump(['SprintId', 'ImplementedTasks', 'TotalStoryPoints'])
 
   for (let i = config.starting_sprint; i !== last_sprint; i++) {
+    // eslint-disable-next-line no-await-in-loop
     const issues = await fetchDataBySprint(jql, i)
 
     exporter.dump([i, issues.total, statistics.sumStoryPoints(issues.issues)])
@@ -75,18 +84,26 @@ async function main() {
 
   jql = new Filter()
     .project(config.jql.project)
-    .and().isBug()
-    .and().component(config.jql.components)
-    .and().fixVersion(config.jql.fix_versions)
-    .and().createdWeeksAgo(config.qa_vs_dev.period)
+    .and()
+    .isBug()
+    .and()
+    .component(config.jql.components)
+    .and()
+    .fixVersion(config.jql.fix_versions)
+    .and()
+    .createdWeeksAgo(config.qa_vs_dev.period)
   const created_last_week = await jira.search(jql, fields)
 
   jql = new Filter()
     .project(config.jql.project)
-    .and().isBug()
-    .and().component(config.jql.components)
-    .and().fixVersion(config.jql.fix_versions)
-    .and().resolvedWeeksAgo(config.qa_vs_dev.period)
+    .and()
+    .isBug()
+    .and()
+    .component(config.jql.components)
+    .and()
+    .fixVersion(config.jql.fix_versions)
+    .and()
+    .resolvedWeeksAgo(config.qa_vs_dev.period)
   const resolved_last_week = await jira.search(jql, fields)
 
   exporter.dump([created_last_week.total, resolved_last_week.total])
@@ -95,5 +112,4 @@ async function main() {
   // exporter.shutdown()
 }
 
-if (require.main === module)
-  main()
+if (require.main === module) main()

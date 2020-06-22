@@ -1,5 +1,3 @@
-'use strict'
-
 const statistics = require('statistics')
 
 test('Sum storypoints', () => {

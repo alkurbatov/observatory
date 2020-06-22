@@ -9,7 +9,8 @@
     "mine-data": "node src/index.js",
     "plot": "Rscript plot/plot.R",
     "lint": "eslint ./bin ./src ./tests --color -f table",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "author": "Alexander Kurbatov",
   "license": "GPL-3.0",
@@ -19,8 +20,7 @@
     "commander": "^3.0.2",
     "config": "^3.1.0",
     "csv-stringify": "^5.3.0",
-    "jira-connector": "^2.11.0",
-    "rooty": "^2.0.0"
+    "jira-connector": "^2.11.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

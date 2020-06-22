@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = class Filter {
   constructor(jql) {
     this.jql = jql || ''
@@ -51,12 +49,12 @@ module.exports = class Filter {
     return this
   }
 
-  project(project_name) {
-    return this.equals('project', project_name)
+  project(name) {
+    return this.equals('project', name)
   }
 
-  issueType(issue_types) {
-    return this.oneOf('Type', issue_types)
+  issueType(types) {
+    return this.oneOf('Type', types)
   }
 
   isDevTask() {
@@ -116,15 +114,13 @@ module.exports = class Filter {
   }
 
   createdWeeksAgo(count) {
-    if (count <= 0)
-      throw new Error('Count should be greater then 0')
+    if (count <= 0) throw new Error('Count should be greater then 0')
 
     return this.greaterOrEquals('created', `-${count}w`)
   }
 
   resolvedWeeksAgo(count) {
-    if (count <= 0)
-      throw new Error('Count should be greater then 0')
+    if (count <= 0) throw new Error('Count should be greater then 0')
 
     return this.greaterOrEquals('resolutiondate', `-${count}w`)
   }
