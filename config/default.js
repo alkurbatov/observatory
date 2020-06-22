@@ -16,6 +16,9 @@ module.exports = {
   // Count of sprints included into analyzing interval.
   window_size: 12,
 
+  // Maximum number of issues processed during single request.
+  bulk_limit: 50,
+
   qa_vs_dev: {
     // Number of weeks to gather 'resolved vs created' statistics.
     period: 3

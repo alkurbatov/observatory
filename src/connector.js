@@ -68,6 +68,7 @@ class Sprint {
     return this.connector.sprint.getSprintIssues({
       sprintId: this.id,
       jql: jql.getFilter(),
+      maxResults: 1000,
       fields: [
         'key',
         'resolution',
@@ -75,6 +76,8 @@ class Sprint {
     })
   }
 
+  // NOTE (alkurbatov): Bulk operation, up to bulk_limit issues
+  // can be processed at once.
   moveIssues(dst_sprint, keys) {
     return this.connector.sprint.moveSprintIssues({
       sprintId: dst_sprint,

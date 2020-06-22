@@ -73,7 +73,10 @@ program
     if (cmd.dryrun)
       process.exit(0)
 
-    await jira.sprint(from_sprint_id).moveIssues(to_sprint_id, keys)
+    for (let i = 0; i < keys.length; i += config.bulk_limit) {
+      const portion = keys.slice(i, i + config.bulk_limit)
+      await jira.sprint(from_sprint_id).moveIssues(to_sprint_id, portion)
+    }
   })
 
 program
