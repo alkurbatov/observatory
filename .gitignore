@@ -11,10 +11,9 @@ config/*
 # NPM dependency directory.
 node_modules
 
-# Don't lock versions of package dependencies.
-package-lock.json
+# NPM registry settings.
+.npmrc
 
 # Vim swap files
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
-
