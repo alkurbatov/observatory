@@ -1,21 +1,21 @@
-const Connector = require('jira-connector')
+const { Client } = require('jira.js')
 
 const SprintStates = ['active', 'closed', 'future']
 
 class Sprint {
   constructor(options) {
-    this.connector = options.connector
+    this.client = options.client
     this.id = options.id
   }
 
   show() {
-    return this.connector.sprint.getSprint({
+    return this.client.sprint.getSprint({
       sprintId: this.id,
     })
   }
 
   issues(jql) {
-    return this.connector.sprint.getSprintIssues({
+    return this.client.sprint.getSprintIssues({
       sprintId: this.id,
       jql: jql.getFilter(),
       maxResults: 1000,
@@ -26,7 +26,7 @@ class Sprint {
   // NOTE (alkurbatov): Bulk operation, up to bulk_limit issues
   // can be processed at once.
   moveIssues(dst_sprint, keys) {
-    return this.connector.sprint.moveSprintIssues({
+    return this.client.sprint.moveSprintIssues({
       sprintId: dst_sprint,
       issues: keys,
     })
@@ -35,17 +35,19 @@ class Sprint {
 
 module.exports = class Jira {
   constructor(options) {
-    this.connector = new Connector({
+    this.client = new Client({
       host: options.host,
-      basic_auth: {
-        username: options.username,
-        password: options.password,
+      authentication: {
+        basic: {
+          username: options.username,
+          apiToken: options.password,
+        },
       },
     })
   }
 
   boards(project) {
-    return this.connector.board.getAllBoards({
+    return this.client.board.getAllBoards({
       startAt: 0,
       maxResults: 100,
       projectKeyOrId: project,
@@ -57,7 +59,7 @@ module.exports = class Jira {
     if (!SprintStates.includes(state))
       throw new Error('Invalid state specified')
 
-    return this.connector.board.getAllSprints({
+    return this.client.board.getAllSprints({
       boardId: board,
       startAt: 0,
       maxResults: 100,
@@ -66,13 +68,13 @@ module.exports = class Jira {
   }
 
   sprint(id) {
-    return new Sprint({ connector: this.connector, id })
+    return new Sprint({ client: this.client, id })
   }
 
   // NOTE (alkurbatov): Use '*all' in the fields array to list
   // all possible fields.
   search(jql, fields) {
-    return this.connector.search.search({
+    return this.client.issueSearch.searchForIssuesUsingJqlGet({
       jql: jql.getFilter(),
       startAt: 0,
       maxResults: 1000,

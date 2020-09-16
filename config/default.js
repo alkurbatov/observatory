@@ -1,6 +1,5 @@
 module.exports = {
-  // Jira instance we want connect to e.g. 'pmc.acronis.com'.
-  // 'https' is used by default.
+  // Jira instance we want connect to e.g. 'https://jira.somehost.com'.
   host: undefined,
 
   // Your Jira login.
