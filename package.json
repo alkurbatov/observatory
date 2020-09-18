@@ -4,8 +4,7 @@
   "description": "Project statistics processing for Jira",
   "main": "src/index.js",
   "scripts": {
-    "mine": "npm run mine-data",
-    "start": "npm run mine && npm run plot",
+    "start": "npm run mine-data && npm run plot",
     "start:debug": "node inspect src/index.js",
     "mine-data": "node src/index.js",
     "plot": "Rscript plot/plot.R",
