@@ -30,24 +30,6 @@ text(
 
 # Implemented dev tasks and storypoints
 tasks <- read.csv(file="tasks.csv")
-implemented_tasks <- barplot(
-  tasks$ImplementedTasks,
-  main="Implemented dev tasks",
-  xlab="Sprints",
-  ylab="Total",
-  ylim=c(0, 40),
-  names.arg=tasks$SprintId,
-)
-
-text(
-  x=implemented_tasks,
-  y=tasks$ImplementedTasks,
-  label=tasks$ImplementedTasks,
-  pos=3,
-  cex=0.8,
-  col="blue",
-)
-
 total_story_points <- barplot(
   tasks$TotalStoryPoints,
   main="Total story points",
