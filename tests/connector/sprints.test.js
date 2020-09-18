@@ -1,13 +1,10 @@
 const Jira = require('connector')
+const MockClient = require('@mocks/client')
 
-jest.mock('jira-connector', () => {
-  return jest.fn().mockImplementation(() => {
-    return {
-      board: {
-        getAllSprints: jest.fn(),
-      },
-    }
-  })
+jest.mock('jira.js', () => {
+  return {
+    Client: jest.fn().mockImplementation(() => new MockClient()),
+  }
 })
 
 test('Not throw on valid sprint states', () => {
