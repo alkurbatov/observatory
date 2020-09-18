@@ -1,32 +1,21 @@
 const fs = require('fs')
-const stringify = require('csv-stringify')
+const { parse } = require('json2csv');
 
 module.exports = class DataExporter {
-  constructor(target) {
-    this.dst = fs.createWriteStream(target)
-    this.dst.on('error', this.onError.bind(this))
-
-    this.stringifier = stringify({})
-    this.stringifier.on('readable', this.onReadable.bind(this))
-    this.stringifier.on('error', this.onError.bind(this))
+  constructor({ dst, fields }) {
+    this.dst = fs.openSync(dst, 'w')
+    this.fields = fields
+    this.header = true
   }
 
   dump(data) {
-    this.stringifier.write(data)
+    const csv = parse(data, { fields: this.fields, header: this.header })
+    fs.appendFileSync(this.dst, `${csv}\n`)
+
+    this.header = false
   }
 
   shutdown() {
-    this.dst.end()
-    this.stringifier.end()
-  }
-
-  onReadable() {
-    let row
-
-    while ((row = this.stringifier.read())) this.dst.write(row)
-  }
-
-  onError(err) {
-    console.log(err)
+    fs.closeSync(this.dst)
   }
 }

@@ -45,17 +45,18 @@ async function main() {
     .and()
     .component(config.jql.components)
 
-  let exporter = new DataExporter('bugs.csv')
-  exporter.dump(['SprintId', 'FixedBugs'])
+  let exporter = new DataExporter({
+    dst: 'bugs.csv',
+    fields: ['SprintId', 'FixedBugs'],
+  })
 
   for (let i = config.starting_sprint; i !== last_sprint; i++) {
     // eslint-disable-next-line no-await-in-loop
     const issues = await fetchDataBySprint(jql, i)
-    exporter.dump([i, issues.total])
+    exporter.dump({ SprintId: i, FixedBugs: issues.total })
   }
 
-  // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
-  // exporter.shutdown()
+  exporter.shutdown()
 
   jql = new Filter()
     .project(config.jql.project)
@@ -66,21 +67,28 @@ async function main() {
     .and()
     .component(config.jql.components)
 
-  exporter = new DataExporter('tasks.csv')
-  exporter.dump(['SprintId', 'ImplementedTasks', 'TotalStoryPoints'])
+  exporter = new DataExporter({
+    dst: 'tasks.csv',
+    fields: ['SprintId', 'ImplementedTasks', 'TotalStoryPoints'],
+  })
 
   for (let i = config.starting_sprint; i !== last_sprint; i++) {
     // eslint-disable-next-line no-await-in-loop
     const issues = await fetchDataBySprint(jql, i)
 
-    exporter.dump([i, issues.total, statistics.sumStoryPoints(issues.issues)])
+    exporter.dump({
+      SprintId: i,
+      ImplementedTasks: issues.total,
+      TotalStoryPoints: statistics.sumStoryPoints(issues.issues),
+    })
   }
 
-  // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
-  // exporter.shutdown()
+  exporter.shutdown()
 
-  exporter = new DataExporter('fix_rate.csv')
-  exporter.dump(['createdLastWeek', 'resolvedLastWeek'])
+  exporter = new DataExporter({
+    dst: 'fix_rate.csv',
+    fields: ['createdLastWeek', 'resolvedLastWeek'],
+  })
 
   jql = new Filter()
     .project(config.jql.project)
@@ -106,10 +114,12 @@ async function main() {
     .resolvedWeeksAgo(config.qa_vs_dev.period)
   const resolved_last_week = await jira.search(jql, fields)
 
-  exporter.dump([created_last_week.total, resolved_last_week.total])
+  exporter.dump({
+    createdLastWeek: created_last_week.total,
+    resolvedLastWeek: resolved_last_week.total,
+  })
 
-  // FIXME (alkurbatov): Perhaps we should shutdown the streams gracefully?
-  // exporter.shutdown()
+  exporter.shutdown()
 }
 
 if (require.main === module) main()
