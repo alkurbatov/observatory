@@ -1,6 +1,6 @@
 module.exports = {
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
-    '^@mocks/(.*)$': '<rootDir>/tests/mocks/$1',
+    '^@mocks/(.*)$': '<rootDir>/test/mocks/$1',
   },
 }
