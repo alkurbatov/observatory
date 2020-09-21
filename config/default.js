@@ -39,6 +39,19 @@ module.exports = {
 
     // List of milestones of a project.
     fix_versions: [],
+
+    // List of fields requested from the Jira API.
+    fields: [
+      'key',
+      'summary',
+      'reporter',
+      'assignee',
+      'created',
+      'priority',
+      'status',
+      'resolution',
+      'timespent',
+    ],
   },
 
   // Settings of columnized output.

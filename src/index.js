@@ -10,19 +10,6 @@ const jira = new Jira({
   password: config.password,
 })
 
-const fields = [
-  'key',
-  'summary',
-  'reporter',
-  'assignee',
-  'created',
-  'priority',
-  'status',
-  'resolution',
-  'timespent',
-  'customfield_10203',
-]
-
 async function fetchDataBySprint(jql, sprint) {
   const sprint_filter = new Filter(jql.getFilter())
     .and()
@@ -30,7 +17,7 @@ async function fetchDataBySprint(jql, sprint) {
     .and()
     .not()
     .sprint(`"HCI Sprint ${sprint + 1}"`)
-  return jira.search(sprint_filter, fields)
+  return jira.search(sprint_filter, config.jql.fields)
 }
 
 async function main() {
@@ -100,7 +87,7 @@ async function main() {
     .fixVersion(config.jql.fix_versions)
     .and()
     .createdWeeksAgo(config.qa_vs_dev.period)
-  const created_last_week = await jira.search(jql, fields)
+  const created_last_week = await jira.search(jql, config.jql.fields)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -112,7 +99,7 @@ async function main() {
     .fixVersion(config.jql.fix_versions)
     .and()
     .resolvedWeeksAgo(config.qa_vs_dev.period)
-  const resolved_last_week = await jira.search(jql, fields)
+  const resolved_last_week = await jira.search(jql, config.jql.fields)
 
   exporter.dump({
     createdLastWeek: created_last_week.total,
