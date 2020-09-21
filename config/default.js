@@ -20,7 +20,7 @@ module.exports = {
 
   qa_vs_dev: {
     // Number of weeks to gather 'resolved vs created' statistics.
-    period: 3
+    period: 3,
   },
 
   // JQL filter settings.
@@ -46,12 +46,12 @@ module.exports = {
     config: {
       points: {
         align: 'right',
-        'minWidth': 10
+        minWidth: 10,
       },
       state: {
         align: 'right',
-        'minWidth': 10
-      }
-    }
-  }
+        minWidth: 10,
+      },
+    },
+  },
 }
