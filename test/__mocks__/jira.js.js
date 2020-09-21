@@ -4,8 +4,12 @@ class MockBoard {
   }
 }
 
-module.exports = class MockClient {
+class MockClient {
   constructor() {
     this.board = new MockBoard()
   }
+}
+
+module.exports = {
+  Client: MockClient,
 }
