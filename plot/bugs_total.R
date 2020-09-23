@@ -34,7 +34,7 @@ legend(
 lines(
   stats$sprint,
   stats$open_bugs_total,
-  type="b",
+  type="l",
   lwd=1.5,
   col="red"
 )
