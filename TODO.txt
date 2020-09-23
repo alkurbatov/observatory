@@ -1,0 +1,5 @@
+* Add debug mode to print all jql queries.
+* Fail immediately, if we haven't found data in project stats.
+* Add unittests for jql.
+* Do lesser number of queries to speed up the process.
+* Calculate max fixed count of bugs.

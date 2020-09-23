@@ -43,8 +43,6 @@ async function main() {
     .and()
     .component(config.jql.components)
     .and()
-    .fixVersion(config.jql.fix_versions)
-    .and()
     .createdWeeksAgo(2)
   const created_bugs = await jira.search(jql, config.jql.fields)
 
