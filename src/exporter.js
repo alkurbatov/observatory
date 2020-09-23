@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { parse } = require('json2csv');
+const { parse } = require('json2csv')
 
 module.exports = class DataExporter {
   constructor({ dst, fields }) {

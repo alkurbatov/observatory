@@ -4,10 +4,8 @@
   "description": "Project statistics processing for Jira",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm run mine-data && npm run plot",
-    "start:debug": "node inspect src/index.js",
-    "mine-data": "node src/index.js",
-    "plot": "Rscript plot/plot.R",
+    "mine": "node src/mine.js",
+    "plot": "node src/export.js && Rscript plot/main.R",
     "lint": "eslint ./bin ./src ./test --color -f table",
     "test": "jest",
     "test:coverage": "jest --coverage"
@@ -20,7 +18,8 @@
     "commander": "^3.0.2",
     "config": "^3.1.0",
     "jira.js": "^1.6.2",
-    "json2csv": "^5.0.1"
+    "json2csv": "^5.0.1",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

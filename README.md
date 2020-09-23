@@ -14,10 +14,13 @@ Also, a collection of handy scripts provided.
 # Install dependencies.
 $ npm install
 
+# Collect the data.
+$ npm run mine -- <sprint-number>
+
 # Draw the plots.
 # The results are exported to Rplots.pdf.
 # The raw results are available in *.csv files.
-$ npm start
+$ npm run plot
 
 # List available sprints:
 $ node bin/observer.js sprints
@@ -30,6 +33,6 @@ $ node bin/observer.js sum <epic_id>
 ```
 
 ## License
-Copyright (c) 2019
+Copyright (c) 2019-2020 Alexander Kurbatov
 
 Licensed under the [GPL 3.0 license](LICENSE).

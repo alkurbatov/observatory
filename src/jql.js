@@ -39,6 +39,11 @@ module.exports = class Filter {
     return this
   }
 
+  notOneOf(field, values) {
+    this.jql += `${field} not in (${values.join(', ')})`
+    return this
+  }
+
   greaterOrEquals(field, value) {
     this.jql += `${field} >= ${value}`
     return this
@@ -85,6 +90,10 @@ module.exports = class Filter {
 
   fixed() {
     return this.oneOf('Resolution', ['Fixed', 'Done'])
+  }
+
+  rejected() {
+    return this.notOneOf('Resolution', ['Fixed', 'Done', 'Unresolved'])
   }
 
   unresolved() {

@@ -8,20 +8,8 @@ module.exports = {
   // Your Jira password.
   password: undefined,
 
-  // Number of the sprint which will be used as a starting point of
-  // analyzing interval.
-  starting_sprint: 0,
-
-  // Count of sprints included into analyzing interval.
-  window_size: 12,
-
   // Maximum number of issues processed during single request.
   bulk_limit: 50,
-
-  qa_vs_dev: {
-    // Number of weeks to gather 'resolved vs created' statistics.
-    period: 3,
-  },
 
   // JQL filter settings.
   jql: {
