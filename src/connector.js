@@ -1,5 +1,7 @@
 const { Client } = require('jira.js')
 
+const log = require('./log').extend('jira')
+
 const SprintStates = ['active', 'closed', 'future']
 
 class Sprint {
@@ -74,6 +76,8 @@ module.exports = class Jira {
   // NOTE (alkurbatov): Use '*all' in the fields array to list
   // all possible fields.
   search(jql, fields) {
+    log(`Executing search request: \n${jql.getFilter()}`)
+
     return this.client.issueSearch.searchForIssuesUsingJqlGet({
       jql: jql.getFilter(),
       startAt: 0,
