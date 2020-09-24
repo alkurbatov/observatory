@@ -8,6 +8,9 @@
 config/*
 !config/default.js
 
+# Testing coverage
+coverage
+
 # Statistics storage.
 db.json
 
