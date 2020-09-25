@@ -70,10 +70,7 @@ async function main() {
     .and()
     .component(config.jql.components)
     .and()
-    .sprint(`"HCI Sprint ${sprint}"`)
-    .and()
-    .not()
-    .sprint(`"HCI Sprint ${sprint + 1}"`)
+    .resolvedWeeksAgo(2)
   const rejected_bugs = await jira.search(jql, config.jql.fields)
 
   jql = new Filter()
