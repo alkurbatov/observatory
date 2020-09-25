@@ -15,7 +15,7 @@ async function main() {
   }
 
   const exporter = new DataExporter({
-    dst: 'project_stats.csv',
+    dst: 'dist/project_stats.csv',
     fields: Object.keys(data[0]),
   })
 
