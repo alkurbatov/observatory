@@ -1,9 +1,12 @@
 stats <- read.csv(file="project_stats.csv")
 
+# Get the range for the y axis.
+yrange <- c(0, max(stats$implemented_this_sprint) + 20)
+
 current_plot <- barplot(
   stats$implemented_this_sprint,
   main="Dev Tasks statistics",
-  ylim=c(0, 100),
+  ylim=yrange,
   names.arg=stats$label,
 )
 
@@ -23,5 +26,5 @@ mtext(
   side=4, # right
   adj=1,
   las=1,
-  padj=-20
+  padj=-15
 )
