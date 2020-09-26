@@ -7,7 +7,7 @@ yrange <- range(stats$open_bugs_total, finite=TRUE)
 # Draw a plot with decorations.
 plot(
    xrange,
-   yrange,
+   c(yrange[1], yrange[2] + 20),
    type="n",
    xaxt="n",
    xlab="",
