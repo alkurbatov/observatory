@@ -34,9 +34,17 @@ legend(
 lines(
   stats$sprint,
   stats$open_bugs_total,
-  type="l",
+  type="o",
   lwd=1.5,
-  col="red"
+  col="red",
+  pch=19, # solid circle.
+)
+
+text(
+  stats$sprint,
+  stats$open_bugs_total,
+  labels=stats$open_bugs_total,
+  pos=3,
 )
 
 # Draw bugjail border.
