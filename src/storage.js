@@ -8,6 +8,7 @@ class DB {
     this.db
       .defaults({
         project_stats: [],
+        unit_test_coverage: [],
       })
       .write()
   }
@@ -24,8 +25,8 @@ class DB {
     project_stats.push(data).write()
   }
 
-  getProjectStats() {
-    return this.db.get('project_stats').value()
+  get(view) {
+    return this.db.get(view).value()
   }
 }
 
