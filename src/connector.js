@@ -17,7 +17,7 @@ class Sprint {
   }
 
   issues(jql) {
-    return this.client.sprint.getSprintIssues({
+    return this.client.sprint.getIssuesForSprint({
       sprintId: this.id,
       jql: jql.getFilter(),
       maxResults: 1000,
@@ -28,7 +28,7 @@ class Sprint {
   // NOTE (alkurbatov): Bulk operation, up to bulk_limit issues
   // can be processed at once.
   moveIssues(dst_sprint, keys) {
-    return this.client.sprint.moveSprintIssues({
+    return this.client.sprint.moveIssuesToSprintAndRank({
       sprintId: dst_sprint,
       issues: keys,
     })
