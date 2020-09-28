@@ -7,7 +7,7 @@ yrange <- range(stats$open_bugs_total, finite=TRUE)
 # Draw a plot with decorations.
 plot(
    xrange,
-   c(yrange[1], yrange[2] + 20),
+   c(yrange[1], yrange[2] + 30),
    type="n",
    xaxt="n",
    xlab="",
@@ -60,4 +60,14 @@ axis(
 abline(
   h=limit,
   col="blue"
+)
+
+# Draw delta
+delta <- calc_delta(stats$open_bugs_total)
+mtext(
+  sprintf("Sprint delta: %s", delta),
+  side=4, # right
+  adj=1.1,
+  las=1,
+  padj=-18
 )

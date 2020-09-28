@@ -1,4 +1,2 @@
 * Add unittests for jql.
 * Do lesser number of queries to speed up the process.
-* Show total bugs delta.
-* Show code coverage delta.

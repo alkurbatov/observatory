@@ -74,7 +74,7 @@ lines(
 
 # Actual values.
 actual <- tail(stats$statements, n=1)
-delta <- calc_delta(stats$statements)
+delta <- calc_delta(stats$statements, "f")
 
 mtext(
   sprintf("Statements: %0.2f%% (%s)", actual, delta),
@@ -85,7 +85,7 @@ mtext(
 )
 
 actual <- tail(stats$branches, n=1)
-delta <- calc_delta(stats$branches)
+delta <- calc_delta(stats$branches, "f")
 
 mtext(
   sprintf("Branches: %0.2f%% (%s)", actual, delta),
@@ -96,7 +96,7 @@ mtext(
 )
 
 actual <- tail(stats$functions, n=1)
-delta <- calc_delta(stats$functions)
+delta <- calc_delta(stats$functions, "f")
 
 mtext(
   sprintf("Functions: %0.2f%% (%s)", actual, delta),
@@ -107,7 +107,7 @@ mtext(
 )
 
 actual <- tail(stats$lines, n=1)
-delta <- calc_delta(stats$lines)
+delta <- calc_delta(stats$lines, "f")
 
 mtext(
   sprintf("Lines: %0.2f%% (%s)", actual, delta),

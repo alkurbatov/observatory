@@ -1,13 +1,18 @@
 # Calculate delta between the last value and the value before lst
 # in the provided vector.
-# Returns: string result
-calc_delta <- function(vector) {
+# Returns: formatted string.
+calc_delta <- function(vector, format="d") {
   length <- length(vector)
   delta <- vector[length] - vector[length - 1]
 
+  sign <- ""
   if (delta > 0) {
-    return(sprintf("+%0.2f", delta))
+      sign <- "+"
   }
 
-  return(sprintf("%0.2f", delta))
+  if (format == "f") {
+    return(sprintf("%s%0.2f", sign, delta))
+  }
+
+  return(sprintf("%s%d", sign, delta))
 }
