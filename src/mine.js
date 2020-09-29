@@ -43,7 +43,7 @@ async function main() {
     .and()
     .component(config.jql.components)
     .and()
-    .createdWeeksAgo(2)
+    .createdWeeksAgo(config.jql.sprint_length)
   const created_bugs = await jira.search(jql, config.jql.fields)
 
   jql = new Filter()
@@ -70,7 +70,7 @@ async function main() {
     .and()
     .component(config.jql.components)
     .and()
-    .resolvedWeeksAgo(2)
+    .resolvedWeeksAgo(config.jql.sprint_length)
   const rejected_bugs = await jira.search(jql, config.jql.fields)
 
   jql = new Filter()

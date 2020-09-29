@@ -28,6 +28,9 @@ module.exports = {
     // List of milestones of a project.
     fix_versions: [],
 
+    // Length of single sprint in weeks.
+    sprint_length: 2,
+
     // List of fields requested from the Jira API.
     fields: [
       'key',
