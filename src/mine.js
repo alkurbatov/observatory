@@ -98,7 +98,7 @@ async function main() {
     implemented_this_sprint: statistics.sumStoryPoints(finished_tasks.issues),
   }
 
-  db.saveProjectStats(stats)
+  db.save('project_stats', stats)
 }
 
 if (require.main === module) main()

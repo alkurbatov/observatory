@@ -13,16 +13,16 @@ class DB {
       .write()
   }
 
-  saveProjectStats(data) {
-    const project_stats = this.db.get('project_stats')
-    const existing_record = project_stats.find({ sprint: data.sprint })
+  save(view, data) {
+    const records = this.db.get(view)
+    const existing_record = records.find({ sprint: data.sprint })
 
     if (existing_record.value()) {
       existing_record.assign(data).write()
       return
     }
 
-    project_stats.push(data).write()
+    records.push(data).write()
   }
 
   get(view) {
