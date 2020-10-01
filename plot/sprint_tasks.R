@@ -8,6 +8,7 @@ current_plot <- barplot(
   main="Dev Tasks statistics",
   ylim=yrange,
   names.arg=stats$label,
+  ylab="story points",
 )
 
 text(
@@ -22,7 +23,7 @@ text(
 # Average story points burned
 story_points_mean <- mean(stats$implemented_this_sprint)
 mtext(
-  sprintf("Average speed: %0.2f story points", story_points_mean),
+  sprintf("Average speed: %0.2f", story_points_mean),
   side=4, # right
   adj=1,
   las=1,
