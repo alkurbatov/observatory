@@ -133,4 +133,10 @@ module.exports = class Filter {
 
     return this.greaterOrEquals('resolutiondate', `-${count}w`)
   }
+
+  assignedTo(people) {
+    if (people.length === 0) throw new Error('Empty assignee list provided')
+
+    return this.oneOf('assignee', people)
+  }
 }
