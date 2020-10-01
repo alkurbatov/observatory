@@ -36,6 +36,8 @@ async function main() {
     .and()
     .unresolved()
   const open_bugs = await jira.search(jql, config.jql.fields)
+  log(`Open bugs total: ${open_bugs.total}`)
+  log(open_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -46,6 +48,8 @@ async function main() {
     .and()
     .createdWeeksAgo(config.jql.sprint_length)
   const created_bugs = await jira.search(jql, config.jql.fields)
+  log(`Created bugs total: ${created_bugs.total}`)
+  log(created_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -61,6 +65,7 @@ async function main() {
     .not()
     .sprint(`"HCI Sprint ${sprint + 1}"`)
   const fixed_bugs = await jira.search(jql, config.jql.fields)
+  log(`Fixed bugs total: ${fixed_bugs.total}`)
   log(fixed_bugs.issues)
 
   jql = new Filter()
@@ -74,6 +79,8 @@ async function main() {
     .and()
     .resolvedWeeksAgo(config.jql.sprint_length)
   const rejected_bugs = await jira.search(jql, config.jql.fields)
+  log(`Rejected bugs total: ${rejected_bugs.total}`)
+  log(rejected_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -89,6 +96,8 @@ async function main() {
     .not()
     .sprint(`"HCI Sprint ${sprint + 1}"`)
   const finished_tasks = await jira.search(jql, config.jql.fields)
+  log(`Finished tasks total: ${finished_tasks.total}`)
+  log(finished_tasks.issues)
 
   const stats = {
     sprint,

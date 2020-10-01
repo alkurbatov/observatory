@@ -3,4 +3,3 @@
 * Do lesser number of queries to speed up the process.
 * Try [ggplot2](https://ggplot2.tidyverse.org/reference/index.html) for better graphs.
 * Filter issues by team people too.
-* Add extra logging to miner.
