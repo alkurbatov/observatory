@@ -30,7 +30,11 @@ program
   .command('sprints []')
   .description('print information about available sprints')
   .option('-f, --filter <sprint_id>', 'filter by particular id', undefined)
-  .option('-s, --state <sprint_state>', 'filter by particular state: active, closed or future', 'active')
+  .option(
+    '-s, --state <sprint_state>',
+    'filter by particular state: active, closed or future',
+    'active'
+  )
   .action(async function (cmd) {
     try {
       if (cmd.filter) {
