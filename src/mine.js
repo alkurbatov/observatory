@@ -6,6 +6,7 @@ const config = require('config')
 const DB = require('./storage')
 const Filter = require('./jql')
 const Jira = require('./connector')
+const log = require('./log').extend('mine')
 const statistics = require('./statistics')
 
 const jira = new Jira({
@@ -60,6 +61,7 @@ async function main() {
     .not()
     .sprint(`"HCI Sprint ${sprint + 1}"`)
   const fixed_bugs = await jira.search(jql, config.jql.fields)
+  log(fixed_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -99,6 +101,14 @@ async function main() {
   }
 
   db.save('project_stats', stats)
+
+  const metrics_fixed = {
+    sprint,
+    label: `Sprint ${sprint}`,
+    ...statistics.countByAssignee(fixed_bugs.issues, config.team.members),
+  }
+
+  db.save('team_metrics_fixed', metrics_fixed)
 }
 
 if (require.main === module) main()

@@ -9,6 +9,7 @@ class DB {
       .defaults({
         project_stats: [],
         unit_test_coverage: [],
+        team_metrics_fixed: [],
       })
       .write()
   }

@@ -45,6 +45,11 @@ module.exports = {
     ],
   },
 
+  team: {
+    // List of members of the team.
+    members: [],
+  },
+
   // Settings of columnized output.
   columnify: {
     config: {
