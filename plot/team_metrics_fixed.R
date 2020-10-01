@@ -45,7 +45,7 @@ for (i in colnames(metrics)){
     # Average bugs fixed.
     fixed_bugs_mean <- mean(personal_metrics)
     mtext(
-      sprintf("Average fixed: %0.1f bugs", fixed_bugs_mean),
+      sprintf("Average fixed: %0.1f", fixed_bugs_mean),
       side=4, # right
       adj=1,
       las=1,
