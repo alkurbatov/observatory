@@ -8,7 +8,8 @@ current_plot <- barplot(
   main="Dev Tasks statistics",
   ylim=yrange,
   names.arg=stats$label,
-  ylab="story points",
+  ylab="Story points",
+  col="darkblue",
 )
 
 text(
