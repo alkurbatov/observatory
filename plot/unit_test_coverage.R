@@ -2,7 +2,7 @@ stats <- read.csv(file="unit_test_coverage.csv")
 
 # Get the range for the x and y axis.
 xrange <- range(stats$sprint, finite=TRUE)
-yrange <- c(0, 100)
+yrange <- c(min(stats$functions) - 10, max(stats$branches) + 20)
 
 # Settings.
 colors <- c("red", "blue", "green", "orange")
