@@ -54,6 +54,22 @@ async function main() {
   jql = new Filter()
     .project(config.jql.project)
     .and()
+    .isDevTask()
+    .and()
+    .component(config.jql.components)
+    .and()
+    .fixVersion(config.jql.fix_versions)
+    .and()
+    .unresolved()
+    .and()
+    .assignedTo(config.team.members)
+  const open_tasks = await jira.search(jql, config.jql.fields)
+  log(`Open tasks total: ${open_tasks.total}`)
+  log(open_tasks.issues)
+
+  jql = new Filter()
+    .project(config.jql.project)
+    .and()
     .isBug()
     .and()
     .fixed()
@@ -107,6 +123,7 @@ async function main() {
     sprint,
     label: `Sprint ${sprint}`,
     open_bugs_total: open_bugs.total,
+    todo_total: statistics.sumStoryPoints(open_tasks.issues),
     created_this_sprint: created_bugs.total,
     fixed_this_sprint: fixed_bugs.total,
     rejected_this_sprint: rejected_bugs.total,
