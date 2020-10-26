@@ -26,6 +26,16 @@ for (i in colnames(metrics)){
       col="blue",
     )
 
+    # Total bugs fixed.
+    total_bugs_max <- sum(personal_metrics)
+    mtext(
+      sprintf("Total fixed: %d", total_bugs_max),
+      side=4, # right
+      adj=1,
+      las=1,
+      padj=-17
+    )
+
     # Maximum bugs fixed.
     fixed_bugs_max <- max(personal_metrics)
     mtext(
@@ -33,7 +43,7 @@ for (i in colnames(metrics)){
       side=4, # right
       adj=1,
       las=1,
-      padj=-17
+      padj=-15
     )
 
     # Average bugs fixed.
@@ -43,6 +53,6 @@ for (i in colnames(metrics)){
       side=4, # right
       adj=1,
       las=1,
-      padj=-15
+      padj=-13
     )
 }
