@@ -37,7 +37,7 @@ legend(
 # Maximum bugs fixed.
 fixed_bugs_max <- max(stats$fixed_this_sprint)
 mtext(
-  sprintf("Maximum fixed: %0.1f", fixed_bugs_max),
+  sprintf("Maximum fixed: %d", fixed_bugs_max),
   side=4, # right
   adj=1,
   las=1,
