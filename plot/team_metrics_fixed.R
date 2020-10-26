@@ -17,12 +17,6 @@ for (i in colnames(metrics)){
       col="darkgreen",
     )
 
-    legend(
-      "topleft",
-      c("fixed"),
-      fill=c("darkgreen"),
-    )
-
     text(
       x=current_plot,
       y=personal_metrics,
