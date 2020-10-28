@@ -39,7 +39,11 @@ function exportData(view, requiredFields = []) {
 }
 
 function main() {
-  ;['project_stats', 'unit_test_coverage'].forEach((view) => exportData(view))
+  ;[
+    'project_stats',
+    'unit_test_coverage_hci',
+    'unit_test_coverage_rnt',
+  ].forEach((view) => exportData(view))
   ;['team_metrics_fixed'].forEach((view) =>
     exportData(view, config.team.members)
   )

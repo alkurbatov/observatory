@@ -8,7 +8,8 @@ class DB {
     this.db
       .defaults({
         project_stats: [],
-        unit_test_coverage: [],
+        unit_test_coverage_hci: [],
+        unit_test_coverage_rnt: [],
         team_metrics_fixed: [],
       })
       .write()
