@@ -35,12 +35,13 @@ module.exports = class Filter {
   }
 
   oneOf(field, values) {
-    this.jql += `${field} in (${values.join(', ')})`
-    return this
-  }
+    if (this.invert) {
+      this.invert = false
+      this.jql += `${field} not in (${values.join(', ')})`
+      return this
+    }
 
-  notOneOf(field, values) {
-    this.jql += `${field} not in (${values.join(', ')})`
+    this.jql += `${field} in (${values.join(', ')})`
     return this
   }
 
@@ -93,7 +94,7 @@ module.exports = class Filter {
   }
 
   rejected() {
-    return this.notOneOf('Resolution', ['Fixed', 'Done', 'Unresolved'])
+    return this.not().oneOf('Resolution', ['Fixed', 'Done', 'Unresolved'])
   }
 
   unresolved() {

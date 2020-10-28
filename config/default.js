@@ -43,6 +43,9 @@ module.exports = {
       'resolution',
       'timespent',
     ],
+
+    // List of people that should be excluded from queries.
+    exclude: [],
   },
 
   team: {
