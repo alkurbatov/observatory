@@ -40,7 +40,6 @@ async function main() {
     .assignedTo(config.jql.exclude)
   const open_bugs = await jira.search(jql, config.jql.fields)
   log(`Open bugs total: ${open_bugs.total}`)
-  log(open_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -55,7 +54,6 @@ async function main() {
     .assignedTo(config.jql.exclude)
   const created_bugs = await jira.search(jql, config.jql.fields)
   log(`Created bugs total: ${created_bugs.total}`)
-  log(created_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -71,7 +69,6 @@ async function main() {
     .assignedTo(config.team.members)
   const open_tasks = await jira.search(jql, config.jql.fields)
   log(`Open tasks total: ${open_tasks.total}`)
-  log(open_tasks.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -90,7 +87,6 @@ async function main() {
     .assignedTo(config.team.members)
   const fixed_bugs = await jira.search(jql, config.jql.fields)
   log(`Fixed bugs total: ${fixed_bugs.total}`)
-  log(fixed_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -107,7 +103,6 @@ async function main() {
     .assignedTo(config.jql.exclude)
   const rejected_bugs = await jira.search(jql, config.jql.fields)
   log(`Rejected bugs total: ${rejected_bugs.total}`)
-  log(rejected_bugs.issues)
 
   jql = new Filter()
     .project(config.jql.project)
@@ -126,7 +121,6 @@ async function main() {
     .assignedTo(config.team.members)
   const finished_tasks = await jira.search(jql, config.jql.fields)
   log(`Finished tasks total: ${finished_tasks.total}`)
-  log(finished_tasks.issues)
 
   const stats = {
     sprint,
