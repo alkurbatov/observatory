@@ -15,7 +15,7 @@ current_plot <- barplot(
   bugs_matrix,
   ylim=yrange,
   main="Bugs statistics",
-  col=c("darkred", "darkgreen", "gray"),
+  col=c("red", "darkgreen", "gray"),
   beside=TRUE,
 )
 

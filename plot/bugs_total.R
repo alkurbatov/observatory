@@ -59,7 +59,8 @@ axis(
 )
 abline(
   h=limit,
-  col="blue"
+  col="darkgreen",
+  lwd=1.5,
 )
 
 # Draw delta
