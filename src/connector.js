@@ -78,11 +78,15 @@ module.exports = class Jira {
   search(jql, fields) {
     log(`Executing search request: \n${jql.getFilter()}`)
 
-    return this.client.issueSearch.searchForIssuesUsingJqlGet({
-      jql: jql.getFilter(),
-      startAt: 0,
-      maxResults: 1000,
-      fields,
-    })
+    return this.client.issueSearch
+      .searchForIssuesUsingJqlGet({
+        jql: jql.getFilter(),
+        startAt: 0,
+        maxResults: 1000,
+        fields,
+      })
+      .catch((err) => {
+        throw new Error(err.response.data.errorMessages)
+      })
   }
 }
