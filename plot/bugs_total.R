@@ -25,7 +25,7 @@ title("Bugs on team")
 legend(
   "topleft",
   c("bugs", "bugjail"),
-  fill=c("red", "blue"),
+  fill=c("red", "darkgreen"),
   inset=.05,
   horiz=FALSE,
 )
