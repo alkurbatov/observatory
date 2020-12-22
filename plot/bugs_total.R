@@ -48,7 +48,7 @@ text(
 )
 
 # Draw bugjail border.
-limit <- 30
+limit <- 34
 axis(
   4,
   at=c(limit),
