@@ -7,8 +7,7 @@ bugs_matrix <- t(bugs_matrix)
 colnames(bugs_matrix) <- stats$label
 
 # Get the range for the y axis.
-local_maximum <- which(bugs_matrix == max(bugs_matrix), arr.ind = TRUE)
-yrange <- c(0, bugs_matrix[local_maximum] + 20)
+yrange <- c(0, max(bugs_matrix) + 20)
 
 # Draw sprints statistics bar plot.
 current_plot <- barplot(
