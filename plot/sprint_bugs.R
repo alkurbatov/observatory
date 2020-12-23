@@ -33,10 +33,10 @@ legend(
   fill=c("darkred", "darkgreen", "gray"),
 )
 
-# Maximum bugs fixed.
-fixed_bugs_max <- max(stats$fixed_this_sprint)
+# Created bugs fixed.
+created_bugs_mean <- mean(stats$created_this_sprint)
 mtext(
-  sprintf("Maximum fixed: %d", fixed_bugs_max),
+  sprintf("Average created: %0.1f", created_bugs_mean),
   side=4, # right
   adj=1,
   las=1,
