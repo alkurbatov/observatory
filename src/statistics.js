@@ -1,5 +1,8 @@
 const sumStoryPoints = (issues) => {
   return issues.reduce((sum, item) => {
+    // NOTE (alkurbatov): Add 'customfield_10203' to config.jql.fields
+    // to enable this calculation. In my current version of Jira
+    // 'customfield_10203' stands to 'Story Points'.
     if (!item.fields.customfield_10203) return sum
 
     return sum + item.fields.customfield_10203
