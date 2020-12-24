@@ -143,6 +143,17 @@ async function main() {
     }
 
     db.save('team_metrics_fixed', metrics_fixed)
+
+    const metrics_implemented = {
+      sprint,
+      label: `Sprint ${sprint}`,
+      ...statistics.countStoryPointsByAssignee(
+        finished_tasks.issues,
+        config.team.members
+      ),
+    }
+
+    db.save('team_metrics_implemented', metrics_implemented)
   } catch (err) {
     console.error(chalk.red(err.message))
   }

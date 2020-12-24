@@ -133,3 +133,41 @@ draw_coverage <- function(repository, stats, xrange, yrange) {
     padj=-12
   )
 }
+
+# Draw barplot with basic metrics.
+draw_metrics <- function(title, stats, labels, yrange, color) {
+  current_plot <- barplot(
+    stats,
+    main=title,
+    ylim=yrange,
+    names.arg=labels,
+    col=color,
+  )
+
+  text(
+    x=current_plot,
+    y=stats,
+    label=stats,
+    pos=3,
+    cex=0.8,
+    col="blue",
+  )
+
+  total <- sum(stats)
+  mtext(
+    sprintf("Total: %0.1f", total),
+    side=4, # right
+    adj=1,
+    las=1,
+    padj=-17
+  )
+
+  average <- mean(stats)
+  mtext(
+    sprintf("Average: %0.1f", average),
+    side=4, # right
+    adj=1,
+    las=1,
+    padj=-15
+  )
+}

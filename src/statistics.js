@@ -10,6 +10,23 @@ const sumStoryPoints = (issues) => {
 }
 
 /* eslint-disable no-param-reassign */
+const countStoryPointsByAssignee = (issues, filter) => {
+  return issues.reduce((counter, item) => {
+    const assignee = item.fields.assignee.name
+    if (!filter.includes(assignee) || !item.fields.customfield_10203)
+      return counter
+
+    if (counter[assignee]) {
+      counter[assignee] += item.fields.customfield_10203
+      return counter
+    }
+
+    counter[assignee] = item.fields.customfield_10203
+    return counter
+  }, {})
+}
+
+/* eslint-disable no-param-reassign */
 const countByAssignee = (issues, filter) => {
   return issues.reduce((counter, item) => {
     const assignee = item.fields.assignee.name
@@ -22,5 +39,6 @@ const countByAssignee = (issues, filter) => {
 
 module.exports = {
   countByAssignee,
+  countStoryPointsByAssignee,
   sumStoryPoints,
 }

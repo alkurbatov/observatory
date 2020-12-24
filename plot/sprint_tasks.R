@@ -3,30 +3,10 @@ stats <- read.csv(file="project_stats.csv")
 # Get the range for the y axis.
 yrange <- c(0, max(stats$implemented_this_sprint) + 20)
 
-current_plot <- barplot(
+draw_metrics(
+  "Story points statistics",
   stats$implemented_this_sprint,
-  main="Dev Tasks statistics",
-  ylim=yrange,
-  names.arg=stats$label,
-  ylab="Story points",
-  col="darkblue",
-)
-
-text(
-  x=current_plot,
-  y=stats$implemented_this_sprint,
-  label=stats$implemented_this_sprint,
-  pos=3,
-  cex=0.8,
-  col="blue",
-)
-
-# Average story points burned
-story_points_mean <- mean(stats$implemented_this_sprint)
-mtext(
-  sprintf("Average speed: %0.2f", story_points_mean),
-  side=4, # right
-  adj=1,
-  las=1,
-  padj=-15
+  stats$label,
+  yrange,
+  "darkblue"
 )

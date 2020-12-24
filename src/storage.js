@@ -11,6 +11,7 @@ class DB {
         unit_test_coverage_hci: [],
         unit_test_coverage_rnt: [],
         team_metrics_fixed: [],
+        team_metrics_implemented: [],
       })
       .write()
   }

@@ -44,7 +44,7 @@ function main() {
     'unit_test_coverage_hci',
     'unit_test_coverage_rnt',
   ].forEach((view) => exportData(view))
-  ;['team_metrics_fixed'].forEach((view) =>
+  ;['team_metrics_fixed', 'team_metrics_implemented'].forEach((view) =>
     exportData(view, config.team.members)
   )
 }
