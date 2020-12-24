@@ -36,16 +36,6 @@ for (i in colnames(metrics)){
       padj=-17
     )
 
-    # Maximum bugs fixed.
-    fixed_bugs_max <- max(personal_metrics)
-    mtext(
-      sprintf("Maximum fixed: %d", fixed_bugs_max),
-      side=4, # right
-      adj=1,
-      las=1,
-      padj=-15
-    )
-
     # Average bugs fixed.
     fixed_bugs_mean <- mean(personal_metrics)
     mtext(
@@ -53,6 +43,6 @@ for (i in colnames(metrics)){
       side=4, # right
       adj=1,
       las=1,
-      padj=-13
+      padj=-15
     )
 }
