@@ -86,10 +86,16 @@ module.exports = class Jira {
         fields,
       })
       .catch((err) => {
-        if (err.response)
-          throw new Error(err.response.data.errorMessages)
+        if (err.response) throw new Error(err.response.data.errorMessages)
 
         throw new Error(err.code)
       })
+  }
+
+  getWorklog(key, startedAfter) {
+    return this.client.issueWorklogs.getIssueWorklogs({
+      issueIdOrKey: key,
+      startedAfter,
+    })
   }
 }

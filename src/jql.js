@@ -140,4 +140,16 @@ module.exports = class Filter {
 
     return this.oneOf('assignee', people)
   }
+
+  loggedBy(people) {
+    if (people.length === 0) throw new Error('Empty list of authors provided')
+
+    return this.oneOf('worklogAuthor', people)
+  }
+
+  loggedWeeksAgo(count) {
+    if (count <= 0) throw new Error('Count should be greater then 0')
+
+    return this.greaterOrEquals('worklogDate', `-${count}w`)
+  }
 }
