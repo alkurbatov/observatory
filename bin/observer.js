@@ -121,7 +121,20 @@ program
       })
     })
 
-    console.log(columnify(data, config.columnify))
+    const displayConfig = {
+      config: {
+        points: {
+          align: 'right',
+          minWidth: 10,
+        },
+        state: {
+          align: 'right',
+          minWidth: 10,
+        },
+      },
+    }
+
+    console.log(columnify(data, displayConfig))
     console.log('---------------------------------------')
     console.log(
       `Story points sum: ${burned_points}/${total_points} (${percent_done}%)`
