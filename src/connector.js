@@ -88,7 +88,7 @@ module.exports = class Jira {
       .catch((err) => {
         if (err.response) throw new Error(err.response.data.errorMessages)
 
-        throw new Error(err.code)
+        throw err
       })
   }
 
