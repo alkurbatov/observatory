@@ -19,7 +19,11 @@ function fillWithZeros(data, requiredFields) {
 
 function exportData(view, requiredFields = []) {
   const data = db.get(view)
+
   if (data.length === 0) {
+    // NOTE (alkurbatov): Coverage results are optional.
+    if (view.startsWith('unit_test_coverage')) return
+
     console.log(chalk.red(`${view} is empty. Please, mine data first.`))
     process.exit(1)
   }
