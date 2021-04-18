@@ -3,11 +3,16 @@
 # Returns: formatted string.
 calc_delta <- function(vector, format="d") {
   length <- length(vector)
+
+  if (length < 2) {
+    return("0")
+  }
+
   delta <- vector[length] - vector[length - 1]
 
   sign <- ""
   if (delta > 0) {
-      sign <- "+"
+    sign <- "+"
   }
 
   if (format == "f") {
