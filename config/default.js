@@ -49,6 +49,9 @@ module.exports = {
   },
 
   team: {
+    // Path to the lowdb database file.
+    db_path: undefined,
+
     // List of members of the team.
     members: [],
   },

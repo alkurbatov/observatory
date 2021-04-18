@@ -1,9 +1,10 @@
 const FileSync = require('lowdb/adapters/FileSync')
+const config = require('config')
 const low = require('lowdb')
 
 class DB {
   constructor() {
-    this.db = low(new FileSync('db.json'))
+    this.db = low(new FileSync(config.team.db_path))
 
     this.db
       .defaults({
