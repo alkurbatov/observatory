@@ -6,8 +6,11 @@ bugs_matrix <- as.matrix(bugs_stats)
 bugs_matrix <- t(bugs_matrix)
 colnames(bugs_matrix) <- stats$label
 
+bugs_max <- max(bugs_matrix)
+gap_coefficient <- 4
+
 # Get the range for the y axis.
-yrange <- c(0, max(bugs_matrix) + 20)
+yrange <- c(0, bugs_max + (bugs_max / gap_coefficient))
 
 # Draw sprints statistics bar plot.
 current_plot <- barplot(
