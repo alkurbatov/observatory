@@ -20,7 +20,7 @@ function fillWithZeros(data, requiredFields) {
 function exportData(view, requiredFields = []) {
   const data = db.get(view)
   if (data.length === 0) {
-    console.log(chalk.red('Database is empty. Please, mine data first.'))
+    console.log(chalk.red(`${view} is empty. Please, mine data first.`))
     process.exit(1)
   }
 
