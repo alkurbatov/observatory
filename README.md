@@ -11,23 +11,34 @@ Also, a collection of handy scripts provided.
 - R language support
 - Rscript available in PATH
 
-## Usage
+## Basic usage
 
 ```bash
 # Install dependencies.
 $ npm install
 
-# Collect the data.
-$ npm run mine -- <sprint-number>
+# Fill required config values,
+# see config/default.js.
+
+# Export currently used config to shell env,
+# e.g. for config/frontend.json:
+$ export NODE_CONFIG_ENV=frontend
+
+# Collect the data using provided config,
+$ run mine -- <sprint-number>
 
 # Draw the plots.
 # The results are exported to Rplots.pdf.
 # The raw results are available in *.csv files.
 $ npm run plot
+```
 
+## Additional options
+
+```bash
 # Run with the application with additional debug logs,
 # specify the DEBUG variable, e.g.:
-$ DEBUG="observatory:*" npm run mine -- 74
+$ DEBUG="observatory:*" NODE_CONFIG_ENV=frontend npm run mine -- 74
 
 # List available sprints:
 $ node bin/observer.js sprints
@@ -41,6 +52,6 @@ $ node bin/observer.js sum <epic_id>
 
 ## License
 
-Copyright (c) 2019-2020 Alexander Kurbatov
+Copyright (c) 2019-2021 Alexander Kurbatov
 
 Licensed under the [GPL 3.0 license](LICENSE).
