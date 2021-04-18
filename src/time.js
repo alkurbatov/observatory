@@ -1,4 +1,3 @@
-
 const chalk = require('chalk')
 const columnify = require('columnify')
 const config = require('config')
@@ -67,7 +66,7 @@ async function main() {
           sum += record.timeSpentSeconds
         }
 
-        sum = Number((sum / 3600).toFixed(2))
+        sum /= 3600
 
         // NOTE (alkurbatov): Cut of 1m logged time.
         if (sum <= 0.02) continue
@@ -78,11 +77,11 @@ async function main() {
           key: issue.key,
           priority: issue.fields.priority.name,
           summary: issue.fields.summary,
-          spent: `${sum}h`,
+          spent: `${sum.toFixed(2)}h`,
         })
       }
 
-      console.log(`\n${person} (${total}/80)`)
+      console.log(`\n${person} (${total.toFixed(2)}/80)`)
       console.log('---------------------------------------')
       console.log(columnify(data, displayConfig))
     }
