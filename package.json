@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "mine": "node src/mine.js",
-    "plot": "mkdir -p dist && node src/export.js && Rscript plot/main.R",
+    "plot": "rm -rf dist && mkdir dist && node src/export.js && Rscript plot/main.R",
     "lint": "eslint ./bin ./src ./test --color -f table",
     "test": "jest",
     "test:coverage": "jest --coverage"
