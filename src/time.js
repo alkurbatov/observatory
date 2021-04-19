@@ -1,6 +1,7 @@
 const chalk = require('chalk')
 const columnify = require('columnify')
 const config = require('config')
+const moment = require('moment-business-days')
 
 const Filter = require('./jql')
 const Jira = require('./connector')
@@ -13,12 +14,19 @@ const jira = new Jira({
 })
 
 async function main() {
-  try {
-    // NOTE (alkurbatov): Put in some magic to jump 2w in the past.
-    const startedAfter = new Date(Date.now() - 12096e5)
+  const args = process.argv.slice(2)
+  if (!args.length) {
+    console.log(chalk.red('Specify time interval'))
+    process.exit(1)
+  }
 
+  const period = args[0]
+  const startedAfter = moment().subtract(period, 'days').toDate()
+  const workDays = moment().businessDiff(moment(startedAfter))
+
+  try {
     for (const person of config.team.members) {
-      const jql = new Filter().loggedBy([person]).and().loggedWeeksAgo(2)
+      const jql = new Filter().loggedBy([person]).and().loggedDaysAgo(period)
 
       // NOTE (alkurbatov): By some reason columnify modifies the provided
       // config so we have to recreate it before next call.
@@ -90,7 +98,7 @@ async function main() {
         })
       }
 
-      console.log(`\n${person} (${total.toFixed(2)}/80)`)
+      console.log(`\n${person} (${total.toFixed(2)}/${workDays * 8})`)
       console.log('---------------------------------------')
       console.log(columnify(data, displayConfig))
     }
