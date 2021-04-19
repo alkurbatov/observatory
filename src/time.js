@@ -76,8 +76,8 @@ async function main() {
 
         sum /= 3600
 
-        // NOTE (alkurbatov): Cut of 1m logged time.
-        if (sum <= 0.02) continue
+        // NOTE (alkurbatov): Cut of logged time < 4m.
+        if (sum <= 0.04) continue
 
         total += sum
 
