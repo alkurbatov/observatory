@@ -28,6 +28,9 @@ async function main() {
           key: {
             minWidth: 14,
           },
+          type: {
+            minWidth: 10,
+          },
           priority: {
             minWidth: 10,
           },
@@ -43,7 +46,12 @@ async function main() {
       }
 
       const data = []
-      const logged_time = await jira.search(jql, ['key', 'priority', 'summary'])
+      const logged_time = await jira.search(jql, [
+        'key',
+        'issuetype',
+        'priority',
+        'summary',
+      ])
       log(logged_time.issues)
 
       let total = 0
@@ -75,6 +83,7 @@ async function main() {
 
         data.push({
           key: issue.key,
+          type: issue.fields.issuetype.name,
           priority: issue.fields.priority.name,
           summary: issue.fields.summary,
           spent: `${sum.toFixed(2)}h`,
