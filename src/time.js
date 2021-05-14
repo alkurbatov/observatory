@@ -3,6 +3,7 @@ const columnify = require('columnify')
 const config = require('config')
 const moment = require('moment-business-days')
 
+const format = require('./format')
 const Filter = require('./jql')
 const Jira = require('./connector')
 const log = require('./log').extend('time')
@@ -82,10 +83,8 @@ async function main() {
           sum += record.timeSpentSeconds
         }
 
-        sum /= 3600
-
         // NOTE (alkurbatov): Cut of logged time < 4m.
-        if (sum <= 0.04) continue
+        if (sum <= 240) continue
 
         total += sum
 
@@ -94,11 +93,15 @@ async function main() {
           type: issue.fields.issuetype.name,
           priority: issue.fields.priority.name,
           summary: issue.fields.summary,
-          spent: `${sum.toFixed(2)}h`,
+          spent: format.secondsToTime(sum),
         })
       }
 
-      console.log(`\n${person} (${total.toFixed(2)}/${workDays * 8})`)
+      console.log(
+        `\n${person} (${format.secondsToTime(total)}/${format.secondsToTime(
+          workDays * 28800
+        )})`
+      )
       console.log('---------------------------------------')
       console.log(columnify(data, displayConfig))
     }
