@@ -50,6 +50,7 @@
       }
     ],
     "max-classes-per-file": "off",
+    "no-await-in-loop": "off",
     "no-cond-assign": "off",
     "no-console": "off",
     "no-continue": "off",
