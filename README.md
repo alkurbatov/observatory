@@ -1,5 +1,7 @@
 # Observatory
 
+[![CI](https://github.com/alkurbatov/observatory/actions/workflows/ci.yml/badge.svg)](https://github.com/alkurbatov/observatory/actions/workflows/ci.yml)
+
 ## About
 
 Show nice-looking sprint statistics using the Jira API and the R language.
