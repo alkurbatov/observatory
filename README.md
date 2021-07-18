@@ -7,7 +7,7 @@ Also, a collection of handy scripts provided.
 
 ## Requirements
 
-- nodejs >= 10
+- nodejs >= 12
 - R language support
 - Rscript available in PATH
 
